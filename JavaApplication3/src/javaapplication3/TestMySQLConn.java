@@ -27,6 +27,8 @@ public class TestMySQLConn {
         Random random = new Random();
         int value = random.nextInt(50);
         
+        // establishing connection to MySQL database using JDBC driver
+        // at localhost port 3306
         System.out.println("MySQL CRUD Example");
         String url = "jdbc:mysql://127.0.0.1:3306/";
         String dbName = "thesisFishTest";
@@ -42,6 +44,15 @@ public class TestMySQLConn {
             
             data = query.executeQuery("select * from javaTable");
             printData(data);
+            
+            /*
+            NOTE:
+            query.executeUpdate(String sql) executes a given SQL statement which
+            can be CREATE, READ, UPDATE, or DELETE
+            
+            query.executeQuery(String sql) executes the given SQL statement which
+            returns a single ResultSet object
+            */
             
             db.close();
             System.out.println("Closed connection");
