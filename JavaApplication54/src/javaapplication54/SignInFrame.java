@@ -6,7 +6,13 @@
 package javaapplication54;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.LayoutManager;
+import java.awt.RenderingHints;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +25,7 @@ public class SignInFrame extends javax.swing.JFrame {
      */
     public SignInFrame() {
         initComponents();
+        
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
@@ -31,20 +38,23 @@ public class SignInFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SignInPanel = new javax.swing.JPanel();
-        SignIn_UNTextField = new javax.swing.JTextField();
-        SignIn_UNLabel = new javax.swing.JLabel();
-        SignIn_PassField = new javax.swing.JPasswordField();
-        SignIn_PassLabel = new javax.swing.JLabel();
-        SignIn_SignInButton = new javax.swing.JButton();
-        SignIn_ForgotPass = new javax.swing.JButton();
-        SignIn_SignUpOpt = new javax.swing.JButton();
-        SignIn_FreshCount = new javax.swing.JLabel();
-        SignIn_Description = new javax.swing.JLabel();
-        SignIn_BG = new javax.swing.JLabel();
+        Panel = new javax.swing.JPanel();
+        PanelBG = new RoundedPanel(50, Color.WHITE);
+        EnterUserID = new javax.swing.JLabel();
+        UserIDField = new javax.swing.JTextField();
+        EnterPassword = new javax.swing.JLabel();
+        PasswordField = new javax.swing.JPasswordField();
+        PasswordCheck = new javax.swing.JCheckBox();
+        SignInButton = new javax.swing.JButton();
+        FPassButton = new javax.swing.JButton();
+        DHAA = new javax.swing.JLabel();
+        SignUpButton = new javax.swing.JButton();
+        FreshCountLabel = new javax.swing.JLabel();
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
+        setMaximumSize(new java.awt.Dimension(1920, 1080));
+        setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -53,160 +63,170 @@ public class SignInFrame extends javax.swing.JFrame {
             }
         });
 
-        SignInPanel.setMaximumSize(new java.awt.Dimension(1920, 1080));
-        SignInPanel.setMinimumSize(new java.awt.Dimension(1920, 1080));
-        SignInPanel.setPreferredSize(new java.awt.Dimension(1920, 1080));
-        SignInPanel.setLayout(null);
+        Panel.setPreferredSize(new java.awt.Dimension(1920, 1080));
+        Panel.setLayout(null);
 
-        SignIn_UNTextField.setBackground(new java.awt.Color(242, 244, 248));
-        SignIn_UNTextField.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        SignIn_UNTextField.setForeground(new java.awt.Color(204, 204, 204));
-        SignIn_UNTextField.setText("Username");
-        SignIn_UNTextField.setBorder(null);
-        SignIn_UNTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        SignIn_UNTextField.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        SignIn_UNTextField.setName(""); // NOI18N
-        SignIn_UNTextField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                SignIn_UNTextFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                SignIn_UNTextFieldFocusLost(evt);
-            }
-        });
-        SignIn_UNTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                SignIn_UNTextFieldKeyTyped(evt);
-            }
-        });
-        SignInPanel.add(SignIn_UNTextField);
-        SignIn_UNTextField.setBounds(190, 230, 510, 80);
+        PanelBG.setOpaque(false);
 
-        SignIn_UNLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Name.png"))); // NOI18N
-        SignInPanel.add(SignIn_UNLabel);
-        SignIn_UNLabel.setBounds(170, 220, 610, 120);
+        EnterUserID.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        EnterUserID.setText("Enter User ID");
 
-        SignIn_PassField.setBackground(new java.awt.Color(242, 244, 248));
-        SignIn_PassField.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        SignIn_PassField.setForeground(new java.awt.Color(204, 204, 204));
-        SignIn_PassField.setText("Password");
-        SignIn_PassField.setToolTipText(" ");
-        SignIn_PassField.setBorder(null);
-        SignIn_PassField.setDisabledTextColor(new java.awt.Color(204, 204, 204));
-        SignIn_PassField.setEchoChar('\u0000');
-        SignIn_PassField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                SignIn_PassFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                SignIn_PassFieldFocusLost(evt);
-            }
-        });
-        SignInPanel.add(SignIn_PassField);
-        SignIn_PassField.setBounds(190, 415, 510, 80);
+        UserIDField.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        UserIDField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        UserIDField.setOpaque(false);
 
-        SignIn_PassLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Password.png"))); // NOI18N
-        SignInPanel.add(SignIn_PassLabel);
-        SignIn_PassLabel.setBounds(170, 410, 610, 110);
+        EnterPassword.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        EnterPassword.setText("Enter Password");
 
-        SignIn_SignInButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Sign In Button.png"))); // NOI18N
-        SignIn_SignInButton.setContentAreaFilled(false);
-        SignIn_SignInButton.addActionListener(new java.awt.event.ActionListener() {
+        PasswordField.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        PasswordField.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        PasswordField.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        PasswordField.setOpaque(false);
+
+        PasswordCheck.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
+        PasswordCheck.setText("Show Password");
+        PasswordCheck.setContentAreaFilled(false);
+        PasswordCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignIn_SignInButtonActionPerformed(evt);
+                PasswordCheckActionPerformed(evt);
             }
         });
-        SignInPanel.add(SignIn_SignInButton);
-        SignIn_SignInButton.setBounds(160, 620, 640, 120);
 
-        SignIn_ForgotPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Forgot Password.png"))); // NOI18N
-        SignIn_ForgotPass.setContentAreaFilled(false);
-        SignInPanel.add(SignIn_ForgotPass);
-        SignIn_ForgotPass.setBounds(390, 740, 160, 35);
-
-        SignIn_SignUpOpt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Sign Up Option.png"))); // NOI18N
-        SignIn_SignUpOpt.setContentAreaFilled(false);
-        SignIn_SignUpOpt.addActionListener(new java.awt.event.ActionListener() {
+        SignInButton.setBackground(new java.awt.Color(0, 0, 0));
+        SignInButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        SignInButton.setForeground(new java.awt.Color(255, 255, 255));
+        SignInButton.setText("Sign In");
+        SignInButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SignInButton.setBorderPainted(false);
+        SignInButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        SignInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignIn_SignUpOptActionPerformed(evt);
+                SignInButtonActionPerformed(evt);
             }
         });
-        SignInPanel.add(SignIn_SignUpOpt);
-        SignIn_SignUpOpt.setBounds(330, 950, 290, 40);
 
-        SignIn_FreshCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SignIn_FreshCount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Fresh Count.png"))); // NOI18N
-        SignInPanel.add(SignIn_FreshCount);
-        SignIn_FreshCount.setBounds(1021, 366, 678, 133);
+        FPassButton.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        FPassButton.setText("Forgot password?");
+        FPassButton.setContentAreaFilled(false);
 
-        SignIn_Description.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Description.png"))); // NOI18N
-        SignInPanel.add(SignIn_Description);
-        SignIn_Description.setBounds(960, 560, 782, 80);
+        DHAA.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        DHAA.setText("Don't have an account?");
 
-        SignIn_BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Background.jpg"))); // NOI18N
-        SignInPanel.add(SignIn_BG);
-        SignIn_BG.setBounds(0, -240, 1970, 1370);
+        SignUpButton.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        SignUpButton.setForeground(new java.awt.Color(51, 153, 255));
+        SignUpButton.setText("Sign Up");
+        SignUpButton.setContentAreaFilled(false);
+        SignUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignUpButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelBGLayout = new javax.swing.GroupLayout(PanelBG);
+        PanelBG.setLayout(PanelBGLayout);
+        PanelBGLayout.setHorizontalGroup(
+            PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBGLayout.createSequentialGroup()
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBGLayout.createSequentialGroup()
+                        .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(EnterPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                                    .addComponent(PasswordCheck, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SignInButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(PanelBGLayout.createSequentialGroup()
+                                    .addGap(119, 119, 119)
+                                    .addComponent(FPassButton)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(EnterUserID, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(UserIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBGLayout.createSequentialGroup()
+                        .addComponent(DHAA)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SignUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(143, 143, 143))))
+        );
+        PanelBGLayout.setVerticalGroup(
+            PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelBGLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(EnterUserID)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(UserIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(EnterPassword)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PasswordCheck)
+                .addGap(83, 83, 83)
+                .addComponent(SignInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(FPassButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DHAA)
+                    .addComponent(SignUpButton))
+                .addGap(49, 49, 49))
+        );
+
+        Panel.add(PanelBG);
+        PanelBG.setBounds(40, 40, 500, 620);
+
+        FreshCountLabel.setFont(new java.awt.Font("Segoe UI", 1, 75)); // NOI18N
+        FreshCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        FreshCountLabel.setText("FRESH COUNT");
+        Panel.add(FreshCountLabel);
+        FreshCountLabel.setBounds(650, 210, 520, 120);
+
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_Blue.jpg"))); // NOI18N
+        Panel.add(Background);
+        Background.setBounds(0, 0, 1920, 1280);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SignInPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1950, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SignInPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1112, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SignIn_SignUpOptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignIn_SignUpOptActionPerformed
-        new SignUpFrame().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_SignIn_SignUpOptActionPerformed
-
-    private void SignIn_UNTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SignIn_UNTextFieldKeyTyped
-
-    }//GEN-LAST:event_SignIn_UNTextFieldKeyTyped
-
-    private void SignIn_UNTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SignIn_UNTextFieldFocusGained
-        if (SignIn_UNTextField.getText().equals("Username")) {
-            SignIn_UNTextField.setText("");
-            SignIn_UNTextField.setForeground(new Color(0, 0, 0));
-        }
-    }//GEN-LAST:event_SignIn_UNTextFieldFocusGained
-
-    private void SignIn_UNTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SignIn_UNTextFieldFocusLost
-        if (SignIn_UNTextField.getText().equals("")) {
-            SignIn_UNTextField.setText("Username");
-            SignIn_UNTextField.setForeground(new Color(204, 204, 204));
-        }
-    }//GEN-LAST:event_SignIn_UNTextFieldFocusLost
-
-    private void SignIn_PassFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SignIn_PassFieldFocusGained
-        if (SignIn_PassField.getText().equals("Password")) {
-            SignIn_PassField.setText(null);
-            SignIn_PassField.setEchoChar('*');
-        }
-    }//GEN-LAST:event_SignIn_PassFieldFocusGained
-
-    private void SignIn_PassFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SignIn_PassFieldFocusLost
-        if (SignIn_PassField.getText().equals("")) {
-            SignIn_PassField.setText("Password");
-            SignIn_PassField.setEchoChar('\u0000');
-            SignIn_PassField.setForeground(new Color(204, 204, 204));
-        }
-    }//GEN-LAST:event_SignIn_PassFieldFocusLost
-
-    private void SignIn_SignInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignIn_SignInButtonActionPerformed
-        new ThesisJFrame().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_SignIn_SignInButtonActionPerformed
-
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         this.requestFocusInWindow();
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void PasswordCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordCheckActionPerformed
+        if (PasswordCheck.isSelected()) {
+            PasswordField.setEchoChar((char)0);
+        } else {
+            PasswordField.setEchoChar('*');
+        }
+    }//GEN-LAST:event_PasswordCheckActionPerformed
+
+    private void SignInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInButtonActionPerformed
+        new ThesisJFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_SignInButtonActionPerformed
+
+    private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
+        new SignUpFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_SignUpButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,16 +263,62 @@ public class SignInFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel SignInPanel;
-    private javax.swing.JLabel SignIn_BG;
-    private javax.swing.JLabel SignIn_Description;
-    private javax.swing.JButton SignIn_ForgotPass;
-    private javax.swing.JLabel SignIn_FreshCount;
-    private javax.swing.JPasswordField SignIn_PassField;
-    private javax.swing.JLabel SignIn_PassLabel;
-    private javax.swing.JButton SignIn_SignInButton;
-    private javax.swing.JButton SignIn_SignUpOpt;
-    private javax.swing.JLabel SignIn_UNLabel;
-    private javax.swing.JTextField SignIn_UNTextField;
+    private javax.swing.JLabel Background;
+    private javax.swing.JLabel DHAA;
+    private javax.swing.JLabel EnterPassword;
+    private javax.swing.JLabel EnterUserID;
+    private javax.swing.JButton FPassButton;
+    private javax.swing.JLabel FreshCountLabel;
+    private javax.swing.JPanel Panel;
+    private javax.swing.JPanel PanelBG;
+    private javax.swing.JCheckBox PasswordCheck;
+    private javax.swing.JPasswordField PasswordField;
+    private javax.swing.JButton SignInButton;
+    private javax.swing.JButton SignUpButton;
+    private javax.swing.JTextField UserIDField;
     // End of variables declaration//GEN-END:variables
+
+    class RoundedPanel extends JPanel
+    {
+        private Color backgroundColor;
+        private int cornerRadius = 15;
+        public RoundedPanel(LayoutManager layout, int radius) {
+            super(layout);
+            cornerRadius = radius;
+        }
+        public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
+            super(layout);
+            cornerRadius = radius;
+            backgroundColor = bgColor;
+        }
+        public RoundedPanel(int radius) {
+            super();
+            cornerRadius = radius;
+            
+        }
+        public RoundedPanel(int radius, Color bgColor) {
+            super();
+            cornerRadius = radius;
+            backgroundColor = bgColor;
+        }
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Dimension arcs = new Dimension(cornerRadius, cornerRadius);
+            int width = getWidth();
+            int height = getHeight();
+            Graphics2D graphics = (Graphics2D) g;
+            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            //Draws the rounded panel with borders.
+            if (backgroundColor != null) {
+                graphics.setColor(backgroundColor);
+            } else {
+                graphics.setColor(getBackground());
+            }
+            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.setColor(getForeground());
+//            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
+//             
+        }
+    }
 }
