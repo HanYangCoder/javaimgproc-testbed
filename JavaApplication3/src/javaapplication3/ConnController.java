@@ -37,25 +37,11 @@ public class ConnController {
         try{
             System.out.println("Connecting to the DB");
             dbConn = DriverManager.getConnection(url+dbName, username, password);
-            //Statement query = (Statement) dbConn.createStatement();
-            //query.executeUpdate("INSERT INTO javaTable(firstName, lastName) VALUES ('java"+value+"', 'jones')");
             
-            //data = query.executeQuery("select * from javaTable");
-            //printData(data);
             System.out.println("Established connection");
-            /*
-            NOTE:
-            query.executeUpdate(String sql) executes a given SQL statement which
-            can be CREATE, READ, UPDATE, or DELETE
-            
-            query.executeQuery(String sql) executes the given SQL statement which
-            returns a single ResultSet object
-            */
             
 //            Thread.sleep(10000);    // waits for 10 seconds
-            
-//            dbConn.close();
-//            System.out.println("Closed connection");
+
         } catch (SQLException ex){
             Logger.getLogger(TestMySQLConn.class.getName()).log(Level.SEVERE, null, ex);
         }
