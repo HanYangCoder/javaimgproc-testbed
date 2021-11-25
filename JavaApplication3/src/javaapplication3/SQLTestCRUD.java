@@ -10,13 +10,22 @@ package javaapplication3;
  * @author hansherrera
  */
 
+import java.sql.*;
+
 public class SQLTestCRUD {
     
     public static void main(String[] args) throws InterruptedException{
         
-        ConnController newConnection = new ConnController();
+//        ConnController newConnection = new ConnController();
+//        
+//        newConnection.getConnection();
+//        newConnection.addUser("Makoto", "Shinkai", "makotoshinkai@gmail.com");
         
-        newConnection.getConnection();
-        newConnection.addUser("Makoto", "Shinkai", "makotoshinkai@gmail.com");
+        UserDBController newUser = new UserDBController();
+        newUser.userLogin(1, "password");
+        //newUser.createUser("Makoto", "Shinkai", "abc123", "555-5555", "example2@email.com", "Tokyo, Japan");
+        newUser.updateUser(3, "John", "Cena", "password", "696969", "john@email.com", "Chicago, USA");
+        ResultSet usersList = newUser.getUserList();
+        newUser.deleteUser(2);
     }
 }
