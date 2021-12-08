@@ -7,6 +7,7 @@ package javaapplication54;
 
 import java.awt.Frame;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -22,6 +23,8 @@ import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -60,132 +63,251 @@ public class ThesisJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BGC = new javax.swing.JPanel();
+        Panel = new javax.swing.JPanel();
+        ChoicesPanel = new javax.swing.JPanel();
+        HomeButton = new javax.swing.JButton();
+        DatabaseButton = new javax.swing.JButton();
+        ForecastButton = new javax.swing.JButton();
         ImgDisplay = new javax.swing.JLabel();
-        Upload = new javax.swing.JButton();
-        RunTest = new javax.swing.JButton();
-        SaveTest = new javax.swing.JButton();
-        Classifications = new javax.swing.JComboBox();
-        DisplayFishCount = new javax.swing.JLabel();
-        FishCount = new javax.swing.JLabel();
-        DisplayEggCount = new javax.swing.JLabel();
-        EggCount = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        BG = new javax.swing.JLabel();
+        Panel2 = new javax.swing.JPanel();
+        UploadButton = new javax.swing.JButton();
+        RunTestButton = new javax.swing.JButton();
+        SaveTestButton = new javax.swing.JButton();
+        FryCountField = new javax.swing.JTextField();
+        SelectLabel = new javax.swing.JLabel();
+        Classification = new javax.swing.JComboBox<>();
+        EggCountLabel = new javax.swing.JLabel();
+        EggCountField = new javax.swing.JTextField();
+        FryCountLabel = new javax.swing.JLabel();
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(255, 255, 255));
 
-        BGC.setBackground(new java.awt.Color(255, 255, 255));
-        BGC.setLayout(null);
+        Panel.setPreferredSize(new java.awt.Dimension(1920, 1080));
+        Panel.setLayout(null);
+
+        ChoicesPanel.setOpaque(false);
+
+        HomeButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        HomeButton.setText("Home");
+        HomeButton.setBorder(null);
+        HomeButton.setBorderPainted(false);
+        HomeButton.setContentAreaFilled(false);
+        HomeButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        HomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomeButtonActionPerformed(evt);
+            }
+        });
+
+        DatabaseButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        DatabaseButton.setText("View Record");
+        DatabaseButton.setBorder(null);
+        DatabaseButton.setBorderPainted(false);
+        DatabaseButton.setContentAreaFilled(false);
+        DatabaseButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DatabaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DatabaseButtonActionPerformed(evt);
+            }
+        });
+
+        ForecastButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        ForecastButton.setText("Forecast");
+        ForecastButton.setBorder(null);
+        ForecastButton.setBorderPainted(false);
+        ForecastButton.setContentAreaFilled(false);
+        ForecastButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        javax.swing.GroupLayout ChoicesPanelLayout = new javax.swing.GroupLayout(ChoicesPanel);
+        ChoicesPanel.setLayout(ChoicesPanelLayout);
+        ChoicesPanelLayout.setHorizontalGroup(
+            ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ChoicesPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(HomeButton)
+                .addGap(29, 29, 29)
+                .addComponent(DatabaseButton)
+                .addGap(31, 31, 31)
+                .addComponent(ForecastButton)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        ChoicesPanelLayout.setVerticalGroup(
+            ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ChoicesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(HomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DatabaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ForecastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        Panel.add(ChoicesPanel);
+        ChoicesPanel.setBounds(10, 10, 310, 60);
 
         ImgDisplay.setBackground(new java.awt.Color(255, 255, 255));
-        ImgDisplay.setForeground(new java.awt.Color(255, 255, 255));
-        ImgDisplay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         ImgDisplay.setOpaque(true);
-        ImgDisplay.setPreferredSize(new java.awt.Dimension(1131, 754));
-        BGC.add(ImgDisplay);
-        ImgDisplay.setBounds(60, 150, 1123, 754);
+        Panel.add(ImgDisplay);
+        ImgDisplay.setBounds(40, 70, 780, 500);
 
-        Upload.setBackground(new java.awt.Color(255, 255, 255));
-        Upload.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        Upload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Upload Button.png"))); // NOI18N
-        Upload.setContentAreaFilled(false);
-        Upload.addActionListener(new java.awt.event.ActionListener() {
+        Panel2.setOpaque(false);
+
+        UploadButton.setBackground(new java.awt.Color(0, 0, 0));
+        UploadButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        UploadButton.setForeground(new java.awt.Color(255, 255, 255));
+        UploadButton.setText("Upload");
+        UploadButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        UploadButton.setBorderPainted(false);
+        UploadButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        UploadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UploadActionPerformed(evt);
+                UploadButtonActionPerformed(evt);
             }
         });
-        BGC.add(Upload);
-        Upload.setBounds(50, 920, 340, 90);
 
-        RunTest.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        RunTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Run Test Button.png"))); // NOI18N
-        RunTest.setBorderPainted(false);
-        RunTest.setContentAreaFilled(false);
-        RunTest.addActionListener(new java.awt.event.ActionListener() {
+        RunTestButton.setBackground(new java.awt.Color(0, 0, 0));
+        RunTestButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        RunTestButton.setForeground(new java.awt.Color(255, 255, 255));
+        RunTestButton.setText("Run Test");
+        RunTestButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        RunTestButton.setBorderPainted(false);
+        RunTestButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        RunTestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RunTestActionPerformed(evt);
+                RunTestButtonActionPerformed(evt);
             }
         });
-        BGC.add(RunTest);
-        RunTest.setBounds(450, 920, 340, 90);
 
-        SaveTest.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        SaveTest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Save Test Button.png"))); // NOI18N
-        SaveTest.setBorderPainted(false);
-        SaveTest.setContentAreaFilled(false);
-        BGC.add(SaveTest);
-        SaveTest.setBounds(850, 920, 340, 90);
-
-        Classifications.setBackground(new java.awt.Color(0, 41, 64));
-        Classifications.setEditable(true);
-        Classifications.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        Classifications.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fish eggs", "Fish fries" }));
-        Classifications.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        Classifications.addActionListener(new java.awt.event.ActionListener() {
+        SaveTestButton.setBackground(new java.awt.Color(0, 0, 0));
+        SaveTestButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        SaveTestButton.setForeground(new java.awt.Color(255, 255, 255));
+        SaveTestButton.setText("Save Test");
+        SaveTestButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SaveTestButton.setBorderPainted(false);
+        SaveTestButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        SaveTestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClassificationsActionPerformed(evt);
+                SaveTestButtonActionPerformed(evt);
             }
         });
-        BGC.add(Classifications);
-        Classifications.setBounds(1220, 150, 636, 86);
 
-        DisplayFishCount.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        DisplayFishCount.setText("Total fish count:");
-        BGC.add(DisplayFishCount);
-        DisplayFishCount.setBounds(1225, 328, 342, 61);
+        javax.swing.GroupLayout Panel2Layout = new javax.swing.GroupLayout(Panel2);
+        Panel2.setLayout(Panel2Layout);
+        Panel2Layout.setHorizontalGroup(
+            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel2Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(UploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89)
+                .addComponent(RunTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93)
+                .addComponent(SaveTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+        Panel2Layout.setVerticalGroup(
+            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addGroup(Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UploadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RunTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SaveTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
+        );
 
-        FishCount.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        FishCount.setText("0000");
-        BGC.add(FishCount);
-        FishCount.setBounds(1530, 398, 104, 64);
+        Panel.add(Panel2);
+        Panel2.setBounds(40, 570, 780, 93);
 
-        DisplayEggCount.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        DisplayEggCount.setText("Total egg count:");
-        BGC.add(DisplayEggCount);
-        DisplayEggCount.setBounds(1225, 502, 174, 32);
+        FryCountField.setEditable(false);
+        FryCountField.setBackground(new java.awt.Color(255, 255, 255));
+        FryCountField.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        FryCountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        FryCountField.setText("0000");
+        FryCountField.setBorder(null);
+        FryCountField.setOpaque(false);
+        Panel.add(FryCountField);
+        FryCountField.setBounds(880, 320, 320, 60);
 
-        EggCount.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        EggCount.setText("0000");
-        BGC.add(EggCount);
-        EggCount.setBounds(1530, 660, 104, 64);
+        SelectLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        SelectLabel.setText("Select Image Classification:");
+        Panel.add(SelectLabel);
+        SelectLabel.setBounds(840, 40, 230, 40);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Short instruction how to run test. One or two sentence(s).");
-        BGC.add(jLabel2);
-        jLabel2.setBounds(60, 110, 611, 32);
+        Classification.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        Classification.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fish eggs", "Fish fries" }));
+        Panel.add(Classification);
+        Classification.setBounds(840, 90, 370, 60);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("Select image classification:");
-        BGC.add(jLabel3);
-        jLabel3.setBounds(1220, 110, 290, 32);
+        EggCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EggCountLabel.setText("Total egg count:");
+        Panel.add(EggCountLabel);
+        EggCountLabel.setBounds(880, 160, 130, 30);
 
-        BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Design.png"))); // NOI18N
-        BG.setPreferredSize(new java.awt.Dimension(1980, 1020));
-        BG.setVerifyInputWhenFocusTarget(false);
-        BGC.add(BG);
-        BG.setBounds(0, -70, 1980, 1020);
+        EggCountField.setEditable(false);
+        EggCountField.setBackground(new java.awt.Color(255, 255, 255));
+        EggCountField.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        EggCountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        EggCountField.setText("0000");
+        EggCountField.setBorder(null);
+        EggCountField.setOpaque(false);
+        Panel.add(EggCountField);
+        EggCountField.setBounds(880, 190, 320, 60);
+
+        FryCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        FryCountLabel.setText("Total fry count:");
+        Panel.add(FryCountLabel);
+        FryCountLabel.setBounds(880, 290, 130, 30);
+
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_BG.png"))); // NOI18N
+        Panel.add(Background);
+        Background.setBounds(0, 0, 1280, 720);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BGC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1980, Short.MAX_VALUE)
+            .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1280, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BGC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RunTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTestActionPerformed
+    private void UploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        filename = f.getAbsolutePath();
+        Image getAbsolutePath = null;
+        ImageIcon icon = new ImageIcon(filename);
+        Image image = icon.getImage().getScaledInstance(ImgDisplay.getWidth(), ImgDisplay.getHeight(), Image.SCALE_SMOOTH);
+        icon = new ImageIcon(image);
+        ImgDisplay.setIcon(icon);
+    }//GEN-LAST:event_UploadButtonActionPerformed
+
+    private void RunTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTestButtonActionPerformed
+        //For Pop-up Menu
+        JTextField field1 = new JTextField();
+        JTextField field2 = new JTextField();
+        Object[] fields = {
+        "Total water volume from PVC sampler:", field1,
+        "Total water volume of hatching tank:", field2
+        };
+        
+        JOptionPane.showConfirmDialog(null, fields, "Please enter", JOptionPane.OK_CANCEL_OPTION);
+        
+        //String value = JOptionPane.showInputDialog(this, "Enter value");
+        
+        //For actual image processing
         int threshold = 100;
         Random rng = new Random(12345);
         
@@ -211,28 +333,23 @@ public class ThesisJFrame extends javax.swing.JFrame {
             contourCount++;
         }
         System.out.println(contourCount);
-        FishCount.setText(String.valueOf(contourCount));
-        ImgDisplay.setIcon(new ImageIcon(HighGui.toBufferedImage(drawing)));              
-    }//GEN-LAST:event_RunTestActionPerformed
+        FryCountField.setText(String.valueOf(contourCount));
+        ImgDisplay.setIcon(new ImageIcon(HighGui.toBufferedImage(drawing)));
+    }//GEN-LAST:event_RunTestButtonActionPerformed
 
-    private void ClassificationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassificationsActionPerformed
-//        jComboBox comboBox = new jComboBox();
-//        comboBox.addItem("fish eggs");
-//        comboBox.addItem("fish fries");
-//        comboBox.setSelectedItem(null);
-    }//GEN-LAST:event_ClassificationsActionPerformed
+    private void SaveTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveTestButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaveTestButtonActionPerformed
 
-    private void UploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File f = chooser.getSelectedFile();
-        filename = f.getAbsolutePath();
-        Image getAbsolutePath = null;
-        ImageIcon icon = new ImageIcon(filename);
-        Image image = icon.getImage().getScaledInstance(ImgDisplay.getWidth(), ImgDisplay.getHeight(), Image.SCALE_SMOOTH);
-        icon = new ImageIcon(image);
-        ImgDisplay.setIcon(icon);
-    }//GEN-LAST:event_UploadActionPerformed
+    private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeButtonActionPerformed
+        new HomeFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_HomeButtonActionPerformed
+
+    private void DatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatabaseButtonActionPerformed
+        new DatabaseFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_DatabaseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,23 +360,8 @@ public class ThesisJFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThesisJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThesisJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThesisJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThesisJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        
+        
         //</editor-fold>
         
         /* Create and display the form */
@@ -271,18 +373,22 @@ public class ThesisJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel BG;
-    private javax.swing.JPanel BGC;
-    private javax.swing.JComboBox Classifications;
-    private javax.swing.JLabel DisplayEggCount;
-    private javax.swing.JLabel DisplayFishCount;
-    private javax.swing.JLabel EggCount;
-    private javax.swing.JLabel FishCount;
+    private javax.swing.JLabel Background;
+    private javax.swing.JPanel ChoicesPanel;
+    private javax.swing.JComboBox<String> Classification;
+    private javax.swing.JButton DatabaseButton;
+    private javax.swing.JTextField EggCountField;
+    private javax.swing.JLabel EggCountLabel;
+    private javax.swing.JButton ForecastButton;
+    private javax.swing.JTextField FryCountField;
+    private javax.swing.JLabel FryCountLabel;
+    private javax.swing.JButton HomeButton;
     private javax.swing.JLabel ImgDisplay;
-    private javax.swing.JButton RunTest;
-    private javax.swing.JButton SaveTest;
-    private javax.swing.JButton Upload;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel Panel;
+    private javax.swing.JPanel Panel2;
+    private javax.swing.JButton RunTestButton;
+    private javax.swing.JButton SaveTestButton;
+    private javax.swing.JLabel SelectLabel;
+    private javax.swing.JButton UploadButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,113 +29,107 @@ public class HomeFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SignInPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        Select_Label = new javax.swing.JLabel();
-        Count_Button = new javax.swing.JButton();
-        Forecasting_Button = new javax.swing.JButton();
-        Database_Button = new javax.swing.JButton();
-        Logout_Button = new javax.swing.JButton();
-        SignIn_BG = new javax.swing.JLabel();
+        Panel = new javax.swing.JPanel();
+        DestinationLabel = new javax.swing.JLabel();
+        CountButton = new javax.swing.JButton();
+        RecordButton = new javax.swing.JButton();
+        ForecastButton = new javax.swing.JButton();
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        SignInPanel.setMaximumSize(new java.awt.Dimension(1920, 1080));
-        SignInPanel.setMinimumSize(new java.awt.Dimension(1920, 1080));
-        SignInPanel.setLayout(null);
+        Panel.setMaximumSize(new java.awt.Dimension(1920, 1080));
+        Panel.setMinimumSize(new java.awt.Dimension(1920, 1080));
+        Panel.setLayout(null);
 
-        jPanel1.setOpaque(false);
+        DestinationLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DestinationLabel.setForeground(new java.awt.Color(255, 255, 255));
+        DestinationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DestinationLabel.setText("Please choose your desired destination:");
+        Panel.add(DestinationLabel);
+        DestinationLabel.setBounds(440, 180, 400, 60);
 
-        Select_Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Please select your desired action.png"))); // NOI18N
-
-        Count_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Egg-Fry Count.png"))); // NOI18N
-        Count_Button.setContentAreaFilled(false);
-        Count_Button.addActionListener(new java.awt.event.ActionListener() {
+        CountButton.setBackground(new java.awt.Color(0, 0, 0));
+        CountButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        CountButton.setForeground(new java.awt.Color(255, 255, 255));
+        CountButton.setText("Egg/Fry Count");
+        CountButton.setBorder(null);
+        CountButton.setBorderPainted(false);
+        CountButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Count_ButtonActionPerformed(evt);
+                CountButtonActionPerformed(evt);
             }
         });
+        Panel.add(CountButton);
+        CountButton.setBounds(440, 270, 400, 60);
 
-        Forecasting_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Forecasting.png"))); // NOI18N
-        Forecasting_Button.setContentAreaFilled(false);
-
-        Database_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_View_Database.png"))); // NOI18N
-        Database_Button.setContentAreaFilled(false);
-
-        Logout_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Log Out.png"))); // NOI18N
-        Logout_Button.setContentAreaFilled(false);
-        Logout_Button.addActionListener(new java.awt.event.ActionListener() {
+        RecordButton.setBackground(new java.awt.Color(0, 0, 0));
+        RecordButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        RecordButton.setForeground(new java.awt.Color(255, 255, 255));
+        RecordButton.setText("View Record");
+        RecordButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        RecordButton.setBorderPainted(false);
+        RecordButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        RecordButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Logout_ButtonActionPerformed(evt);
+                RecordButtonActionPerformed(evt);
             }
         });
+        Panel.add(RecordButton);
+        RecordButton.setBounds(440, 360, 400, 60);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(684, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Forecasting_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Database_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Count_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(Select_Label)
-                                .addGap(72, 72, 72)))
-                        .addGap(606, 606, 606))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Logout_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(848, 848, 848))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(Select_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
-                .addComponent(Forecasting_Button)
-                .addGap(18, 18, 18)
-                .addComponent(Database_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Count_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Logout_Button)
-                .addContainerGap(262, Short.MAX_VALUE))
-        );
+        ForecastButton.setBackground(new java.awt.Color(0, 0, 0));
+        ForecastButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        ForecastButton.setForeground(new java.awt.Color(255, 255, 255));
+        ForecastButton.setText("Forecast");
+        ForecastButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ForecastButton.setBorderPainted(false);
+        ForecastButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ForecastButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ForecastButtonActionPerformed(evt);
+            }
+        });
+        Panel.add(ForecastButton);
+        ForecastButton.setBounds(440, 450, 400, 60);
 
-        SignInPanel.add(jPanel1);
-        jPanel1.setBounds(0, 0, 1920, 1080);
-
-        SignIn_BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Background.jpg"))); // NOI18N
-        SignInPanel.add(SignIn_BG);
-        SignIn_BG.setBounds(0, -240, 1970, 1370);
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_Blue.jpg"))); // NOI18N
+        Panel.add(Background);
+        Background.setBounds(0, 0, 1660, 920);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SignInPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1920, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SignInPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Count_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Count_ButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Count_ButtonActionPerformed
-
-    private void Logout_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Logout_ButtonActionPerformed
-        new SignInFrame().setVisible(true);
+    private void ForecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastButtonActionPerformed
+        new ForecastFrame().setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_Logout_ButtonActionPerformed
+    }//GEN-LAST:event_ForecastButtonActionPerformed
+
+    private void RecordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecordButtonActionPerformed
+        new DatabaseFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_RecordButtonActionPerformed
+
+    private void CountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CountButtonActionPerformed
+        new ThesisJFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_CountButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,22 +140,7 @@ public class HomeFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -173,13 +152,11 @@ public class HomeFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Count_Button;
-    private javax.swing.JButton Database_Button;
-    private javax.swing.JButton Forecasting_Button;
-    private javax.swing.JButton Logout_Button;
-    private javax.swing.JLabel Select_Label;
-    private javax.swing.JPanel SignInPanel;
-    private javax.swing.JLabel SignIn_BG;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel Background;
+    private javax.swing.JButton CountButton;
+    private javax.swing.JLabel DestinationLabel;
+    private javax.swing.JButton ForecastButton;
+    private javax.swing.JPanel Panel;
+    private javax.swing.JButton RecordButton;
     // End of variables declaration//GEN-END:variables
 }

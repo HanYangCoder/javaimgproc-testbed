@@ -29,89 +29,230 @@ public class DatabaseFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SignInPanel = new javax.swing.JPanel();
-        Table = new javax.swing.JLabel();
-        Return_Button = new javax.swing.JButton();
-        Buttons = new javax.swing.JPanel();
-        User_Button = new javax.swing.JButton();
-        EggFryCount_Button = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        BG = new javax.swing.JLabel();
+        DatabasePanel = new javax.swing.JPanel();
+        ChoicesPanel = new javax.swing.JPanel();
+        HomeButton = new javax.swing.JButton();
+        ImgProcButton = new javax.swing.JButton();
+        ForecastButton = new javax.swing.JButton();
+        Choices2Panel = new javax.swing.JPanel();
+        Separator = new javax.swing.JSeparator();
+        Users = new javax.swing.JButton();
+        EggFryCount = new javax.swing.JButton();
+        Forecast = new javax.swing.JButton();
+        DisplayField = new javax.swing.JTextField();
+        DataTable = new javax.swing.JScrollPane();
+        Table = new javax.swing.JTable();
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        SignInPanel.setMaximumSize(new java.awt.Dimension(1920, 1080));
-        SignInPanel.setMinimumSize(new java.awt.Dimension(1920, 1080));
-        SignInPanel.setLayout(null);
+        DatabasePanel.setMaximumSize(new java.awt.Dimension(1920, 1080));
+        DatabasePanel.setMinimumSize(new java.awt.Dimension(1920, 1080));
+        DatabasePanel.setLayout(null);
 
-        Table.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Table.png"))); // NOI18N
-        SignInPanel.add(Table);
-        Table.setBounds(470, 20, 1460, 1040);
+        ChoicesPanel.setOpaque(false);
 
-        Return_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Return.png"))); // NOI18N
-        Return_Button.setContentAreaFilled(false);
-        SignInPanel.add(Return_Button);
-        Return_Button.setBounds(10, 30, 135, 49);
+        HomeButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        HomeButton.setText("Home");
+        HomeButton.setBorder(null);
+        HomeButton.setBorderPainted(false);
+        HomeButton.setContentAreaFilled(false);
+        HomeButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        HomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomeButtonActionPerformed(evt);
+            }
+        });
 
-        Buttons.setOpaque(false);
+        ImgProcButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        ImgProcButton.setText("Egg/Fry Count");
+        ImgProcButton.setBorder(null);
+        ImgProcButton.setBorderPainted(false);
+        ImgProcButton.setContentAreaFilled(false);
+        ImgProcButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        ImgProcButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImgProcButtonActionPerformed(evt);
+            }
+        });
 
-        User_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_User.png"))); // NOI18N
-        User_Button.setContentAreaFilled(false);
+        ForecastButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        ForecastButton.setText("Forecast");
+        ForecastButton.setBorder(null);
+        ForecastButton.setBorderPainted(false);
+        ForecastButton.setContentAreaFilled(false);
+        ForecastButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        EggFryCount_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Egg-Fry Count_1.png"))); // NOI18N
-        EggFryCount_Button.setContentAreaFilled(false);
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_Forecast.png"))); // NOI18N
-        jButton2.setContentAreaFilled(false);
-
-        javax.swing.GroupLayout ButtonsLayout = new javax.swing.GroupLayout(Buttons);
-        Buttons.setLayout(ButtonsLayout);
-        ButtonsLayout.setHorizontalGroup(
-            ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ButtonsLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonsLayout.createSequentialGroup()
-                        .addComponent(EggFryCount_Button)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonsLayout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(69, 69, 69))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonsLayout.createSequentialGroup()
-                        .addComponent(User_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(112, 112, 112))))
+        javax.swing.GroupLayout ChoicesPanelLayout = new javax.swing.GroupLayout(ChoicesPanel);
+        ChoicesPanel.setLayout(ChoicesPanelLayout);
+        ChoicesPanelLayout.setHorizontalGroup(
+            ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ChoicesPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(HomeButton)
+                .addGap(29, 29, 29)
+                .addComponent(ImgProcButton)
+                .addGap(31, 31, 31)
+                .addComponent(ForecastButton)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
-        ButtonsLayout.setVerticalGroup(
-            ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ButtonsLayout.createSequentialGroup()
-                .addComponent(User_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(EggFryCount_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+        ChoicesPanelLayout.setVerticalGroup(
+            ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ChoicesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(HomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ImgProcButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ForecastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SignInPanel.add(Buttons);
-        Buttons.setBounds(50, 390, 330, 330);
+        DatabasePanel.add(ChoicesPanel);
+        ChoicesPanel.setBounds(10, 10, 320, 60);
 
-        BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_BG.png"))); // NOI18N
-        SignInPanel.add(BG);
-        BG.setBounds(0, -140, 1920, 1350);
+        Choices2Panel.setOpaque(false);
+
+        Separator.setBackground(new java.awt.Color(0, 0, 0));
+        Separator.setForeground(new java.awt.Color(0, 0, 0));
+        Separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        Separator.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        Users.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Users.setText("Users");
+        Users.setBorder(null);
+        Users.setContentAreaFilled(false);
+
+        EggFryCount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EggFryCount.setText("Previous Egg/Fry Count");
+        EggFryCount.setBorder(null);
+        EggFryCount.setContentAreaFilled(false);
+
+        Forecast.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Forecast.setText("Previous Forecast");
+        Forecast.setBorder(null);
+        Forecast.setContentAreaFilled(false);
+        Forecast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ForecastActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Choices2PanelLayout = new javax.swing.GroupLayout(Choices2Panel);
+        Choices2Panel.setLayout(Choices2PanelLayout);
+        Choices2PanelLayout.setHorizontalGroup(
+            Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(EggFryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Forecast, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(198, Short.MAX_VALUE)))
+        );
+        Choices2PanelLayout.setVerticalGroup(
+            Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Choices2PanelLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(EggFryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(Forecast, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
+            .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                    .addContainerGap(85, Short.MAX_VALUE)
+                    .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(85, Short.MAX_VALUE)))
+        );
+
+        DatabasePanel.add(Choices2Panel);
+        Choices2Panel.setBounds(20, 80, 210, 530);
+
+        DisplayField.setEditable(false);
+        DisplayField.setBackground(new java.awt.Color(255, 255, 255));
+        DisplayField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        DisplayField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        DisplayField.setText("Users' Record");
+        DisplayField.setBorder(null);
+        DisplayField.setOpaque(false);
+        DatabasePanel.add(DisplayField);
+        DisplayField.setBounds(410, 20, 160, 50);
+
+        Table.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "User ID", "First Name", "Last Name", "Contact Number", "Email", "Address"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        Table.setGridColor(new java.awt.Color(255, 255, 255));
+        Table.setOpaque(false);
+        Table.setPreferredSize(new java.awt.Dimension(450, 0));
+        DataTable.setViewportView(Table);
+
+        DatabasePanel.add(DataTable);
+        DataTable.setBounds(410, 90, 820, 550);
+
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_BG.png"))); // NOI18N
+        DatabasePanel.add(Background);
+        Background.setBounds(-120, -10, 1580, 980);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SignInPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 3629, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(DatabasePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SignInPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1164, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(DatabasePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeButtonActionPerformed
+        new HomeFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_HomeButtonActionPerformed
+
+    private void ImgProcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImgProcButtonActionPerformed
+        new ThesisJFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ImgProcButtonActionPerformed
+
+    private void ForecastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastActionPerformed
+        new ForecastFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_ForecastActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,13 +290,19 @@ public class DatabaseFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel BG;
-    private javax.swing.JPanel Buttons;
-    private javax.swing.JButton EggFryCount_Button;
-    private javax.swing.JButton Return_Button;
-    private javax.swing.JPanel SignInPanel;
-    private javax.swing.JLabel Table;
-    private javax.swing.JButton User_Button;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel Background;
+    private javax.swing.JPanel Choices2Panel;
+    private javax.swing.JPanel ChoicesPanel;
+    private javax.swing.JScrollPane DataTable;
+    private javax.swing.JPanel DatabasePanel;
+    private javax.swing.JTextField DisplayField;
+    private javax.swing.JButton EggFryCount;
+    private javax.swing.JButton Forecast;
+    private javax.swing.JButton ForecastButton;
+    private javax.swing.JButton HomeButton;
+    private javax.swing.JButton ImgProcButton;
+    private javax.swing.JSeparator Separator;
+    private javax.swing.JTable Table;
+    private javax.swing.JButton Users;
     // End of variables declaration//GEN-END:variables
 }
