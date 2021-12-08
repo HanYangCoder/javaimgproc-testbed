@@ -50,10 +50,12 @@ public class SignInFrame extends javax.swing.JFrame {
         DHAA = new javax.swing.JLabel();
         SignUpButton = new javax.swing.JButton();
         FreshCountLabel = new javax.swing.JLabel();
+        Panel_1 = new javax.swing.JPanel();
+        Description = new javax.swing.JLabel();
+        Description_1 = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1920, 1080));
         setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -107,6 +109,7 @@ public class SignInFrame extends javax.swing.JFrame {
 
         FPassButton.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         FPassButton.setText("Forgot password?");
+        FPassButton.setBorder(null);
         FPassButton.setContentAreaFilled(false);
 
         DHAA.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -115,6 +118,7 @@ public class SignInFrame extends javax.swing.JFrame {
         SignUpButton.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         SignUpButton.setForeground(new java.awt.Color(51, 153, 255));
         SignUpButton.setText("Sign Up");
+        SignUpButton.setBorder(null);
         SignUpButton.setContentAreaFilled(false);
         SignUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +172,7 @@ public class SignInFrame extends javax.swing.JFrame {
                 .addComponent(SignInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(FPassButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DHAA)
                     .addComponent(SignUpButton))
@@ -182,7 +186,45 @@ public class SignInFrame extends javax.swing.JFrame {
         FreshCountLabel.setForeground(new java.awt.Color(255, 255, 255));
         FreshCountLabel.setText("FRESH COUNT");
         Panel.add(FreshCountLabel);
-        FreshCountLabel.setBounds(650, 210, 520, 120);
+        FreshCountLabel.setBounds(650, 260, 520, 120);
+
+        Panel_1.setOpaque(false);
+
+        Description.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Description.setForeground(new java.awt.Color(255, 255, 255));
+        Description.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Description.setText("The easiest and fastest way of counting fish eggs and fries");
+
+        Description_1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Description_1.setForeground(new java.awt.Color(255, 255, 255));
+        Description_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Description_1.setText("through automated counting.");
+
+        javax.swing.GroupLayout Panel_1Layout = new javax.swing.GroupLayout(Panel_1);
+        Panel_1.setLayout(Panel_1Layout);
+        Panel_1Layout.setHorizontalGroup(
+            Panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Description_1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+            .addGroup(Panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        Panel_1Layout.setVerticalGroup(
+            Panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_1Layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(Description_1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+            .addGroup(Panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(49, Short.MAX_VALUE)))
+        );
+
+        Panel.add(Panel_1);
+        Panel_1.setBounds(650, 350, 520, 100);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_Blue.jpg"))); // NOI18N
         Panel.add(Background);
@@ -219,7 +261,7 @@ public class SignInFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordCheckActionPerformed
 
     private void SignInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInButtonActionPerformed
-        new ThesisJFrame().setVisible(true);
+        new HomeFrame().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_SignInButtonActionPerformed
 
@@ -237,23 +279,7 @@ public class SignInFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignInFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignInFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignInFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -265,12 +291,15 @@ public class SignInFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JLabel DHAA;
+    private javax.swing.JLabel Description;
+    private javax.swing.JLabel Description_1;
     private javax.swing.JLabel EnterPassword;
     private javax.swing.JLabel EnterUserID;
     private javax.swing.JButton FPassButton;
     private javax.swing.JLabel FreshCountLabel;
     private javax.swing.JPanel Panel;
     private javax.swing.JPanel PanelBG;
+    private javax.swing.JPanel Panel_1;
     private javax.swing.JCheckBox PasswordCheck;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JButton SignInButton;

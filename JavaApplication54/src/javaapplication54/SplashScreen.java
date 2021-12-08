@@ -37,19 +37,31 @@ public class SplashScreen extends javax.swing.JFrame {
 
         Panel = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
+        ProgressBar = new javax.swing.JProgressBar();
+        Percentage = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
         setResizable(false);
 
         Panel.setLayout(null);
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/FishLogo.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_Logo.png"))); // NOI18N
         Panel.add(Logo);
-        Logo.setBounds(550, 240, 200, 200);
+        Logo.setBounds(390, 160, 500, 300);
+
+        ProgressBar.setBackground(new java.awt.Color(255, 255, 255));
+        Panel.add(ProgressBar);
+        ProgressBar.setBounds(320, 580, 630, 20);
+
+        Percentage.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        Percentage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Percentage.setText("0%");
+        Panel.add(Percentage);
+        Percentage.setBounds(600, 620, 80, 21);
 
         Background.setBackground(new java.awt.Color(255, 255, 255));
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/BlueG.png"))); // NOI18N
         Background.setOpaque(true);
         Panel.add(Background);
         Background.setBounds(0, -10, 1310, 820);
@@ -90,7 +102,6 @@ public class SplashScreen extends javax.swing.JFrame {
         //</editor-fold>
         
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -104,5 +115,7 @@ public class SplashScreen extends javax.swing.JFrame {
     private javax.swing.JLabel Background;
     private javax.swing.JLabel Logo;
     private javax.swing.JPanel Panel;
+    public javax.swing.JLabel Percentage;
+    public javax.swing.JProgressBar ProgressBar;
     // End of variables declaration//GEN-END:variables
 }

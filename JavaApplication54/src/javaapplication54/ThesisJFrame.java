@@ -23,6 +23,8 @@ import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -62,17 +64,21 @@ public class ThesisJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         Panel = new javax.swing.JPanel();
+        ChoicesPanel = new javax.swing.JPanel();
+        HomeButton = new javax.swing.JButton();
+        DatabaseButton = new javax.swing.JButton();
+        ForecastButton = new javax.swing.JButton();
         ImgDisplay = new javax.swing.JLabel();
         Panel2 = new javax.swing.JPanel();
         UploadButton = new javax.swing.JButton();
         RunTestButton = new javax.swing.JButton();
         SaveTestButton = new javax.swing.JButton();
+        FryCountField = new javax.swing.JTextField();
         SelectLabel = new javax.swing.JLabel();
         Classification = new javax.swing.JComboBox<>();
         EggCountLabel = new javax.swing.JLabel();
         EggCountField = new javax.swing.JTextField();
         FryCountLabel = new javax.swing.JLabel();
-        FryCountField = new javax.swing.JTextField();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,10 +88,70 @@ public class ThesisJFrame extends javax.swing.JFrame {
         Panel.setPreferredSize(new java.awt.Dimension(1920, 1080));
         Panel.setLayout(null);
 
+        ChoicesPanel.setOpaque(false);
+
+        HomeButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        HomeButton.setText("Home");
+        HomeButton.setBorder(null);
+        HomeButton.setBorderPainted(false);
+        HomeButton.setContentAreaFilled(false);
+        HomeButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        HomeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HomeButtonActionPerformed(evt);
+            }
+        });
+
+        DatabaseButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        DatabaseButton.setText("View Record");
+        DatabaseButton.setBorder(null);
+        DatabaseButton.setBorderPainted(false);
+        DatabaseButton.setContentAreaFilled(false);
+        DatabaseButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DatabaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DatabaseButtonActionPerformed(evt);
+            }
+        });
+
+        ForecastButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        ForecastButton.setText("Forecast");
+        ForecastButton.setBorder(null);
+        ForecastButton.setBorderPainted(false);
+        ForecastButton.setContentAreaFilled(false);
+        ForecastButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        javax.swing.GroupLayout ChoicesPanelLayout = new javax.swing.GroupLayout(ChoicesPanel);
+        ChoicesPanel.setLayout(ChoicesPanelLayout);
+        ChoicesPanelLayout.setHorizontalGroup(
+            ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ChoicesPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(HomeButton)
+                .addGap(29, 29, 29)
+                .addComponent(DatabaseButton)
+                .addGap(31, 31, 31)
+                .addComponent(ForecastButton)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        ChoicesPanelLayout.setVerticalGroup(
+            ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ChoicesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(HomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DatabaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ForecastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        Panel.add(ChoicesPanel);
+        ChoicesPanel.setBounds(10, 10, 310, 60);
+
         ImgDisplay.setBackground(new java.awt.Color(255, 255, 255));
         ImgDisplay.setOpaque(true);
         Panel.add(ImgDisplay);
-        ImgDisplay.setBounds(70, 70, 780, 500);
+        ImgDisplay.setBounds(40, 70, 780, 500);
 
         Panel2.setOpaque(false);
 
@@ -153,37 +219,7 @@ public class ThesisJFrame extends javax.swing.JFrame {
         );
 
         Panel.add(Panel2);
-        Panel2.setBounds(70, 570, 780, 93);
-
-        SelectLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        SelectLabel.setText("Select Image Classification:");
-        Panel.add(SelectLabel);
-        SelectLabel.setBounds(870, 40, 230, 40);
-
-        Classification.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        Classification.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fish eggs", "Fish fries" }));
-        Panel.add(Classification);
-        Classification.setBounds(870, 90, 330, 60);
-
-        EggCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        EggCountLabel.setText("Total egg count:");
-        Panel.add(EggCountLabel);
-        EggCountLabel.setBounds(880, 280, 130, 30);
-
-        EggCountField.setEditable(false);
-        EggCountField.setBackground(new java.awt.Color(255, 255, 255));
-        EggCountField.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        EggCountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        EggCountField.setText("0000");
-        EggCountField.setBorder(null);
-        EggCountField.setOpaque(false);
-        Panel.add(EggCountField);
-        EggCountField.setBounds(880, 310, 320, 60);
-
-        FryCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        FryCountLabel.setText("Total fry count:");
-        Panel.add(FryCountLabel);
-        FryCountLabel.setBounds(880, 410, 130, 30);
+        Panel2.setBounds(40, 570, 780, 93);
 
         FryCountField.setEditable(false);
         FryCountField.setBackground(new java.awt.Color(255, 255, 255));
@@ -193,7 +229,37 @@ public class ThesisJFrame extends javax.swing.JFrame {
         FryCountField.setBorder(null);
         FryCountField.setOpaque(false);
         Panel.add(FryCountField);
-        FryCountField.setBounds(880, 440, 320, 60);
+        FryCountField.setBounds(880, 320, 320, 60);
+
+        SelectLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        SelectLabel.setText("Select Image Classification:");
+        Panel.add(SelectLabel);
+        SelectLabel.setBounds(840, 40, 230, 40);
+
+        Classification.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        Classification.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fish eggs", "Fish fries" }));
+        Panel.add(Classification);
+        Classification.setBounds(840, 90, 370, 60);
+
+        EggCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EggCountLabel.setText("Total egg count:");
+        Panel.add(EggCountLabel);
+        EggCountLabel.setBounds(880, 160, 130, 30);
+
+        EggCountField.setEditable(false);
+        EggCountField.setBackground(new java.awt.Color(255, 255, 255));
+        EggCountField.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        EggCountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        EggCountField.setText("0000");
+        EggCountField.setBorder(null);
+        EggCountField.setOpaque(false);
+        Panel.add(EggCountField);
+        EggCountField.setBounds(880, 190, 320, 60);
+
+        FryCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        FryCountLabel.setText("Total fry count:");
+        Panel.add(FryCountLabel);
+        FryCountLabel.setBounds(880, 290, 130, 30);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_BG.png"))); // NOI18N
         Panel.add(Background);
@@ -229,6 +295,19 @@ public class ThesisJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_UploadButtonActionPerformed
 
     private void RunTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTestButtonActionPerformed
+        //For Pop-up Menu
+        JTextField field1 = new JTextField();
+        JTextField field2 = new JTextField();
+        Object[] fields = {
+        "Total water volume from PVC sampler:", field1,
+        "Total water volume of hatching tank:", field2
+        };
+        
+        JOptionPane.showConfirmDialog(null, fields, "Please enter", JOptionPane.OK_CANCEL_OPTION);
+        
+        //String value = JOptionPane.showInputDialog(this, "Enter value");
+        
+        //For actual image processing
         int threshold = 100;
         Random rng = new Random(12345);
         
@@ -262,6 +341,16 @@ public class ThesisJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SaveTestButtonActionPerformed
 
+    private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeButtonActionPerformed
+        new HomeFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_HomeButtonActionPerformed
+
+    private void DatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatabaseButtonActionPerformed
+        new DatabaseFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_DatabaseButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,11 +374,15 @@ public class ThesisJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
+    private javax.swing.JPanel ChoicesPanel;
     private javax.swing.JComboBox<String> Classification;
+    private javax.swing.JButton DatabaseButton;
     private javax.swing.JTextField EggCountField;
     private javax.swing.JLabel EggCountLabel;
+    private javax.swing.JButton ForecastButton;
     private javax.swing.JTextField FryCountField;
     private javax.swing.JLabel FryCountLabel;
+    private javax.swing.JButton HomeButton;
     private javax.swing.JLabel ImgDisplay;
     private javax.swing.JPanel Panel;
     private javax.swing.JPanel Panel2;

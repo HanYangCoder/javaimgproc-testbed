@@ -52,8 +52,8 @@ public class HomeFrame extends javax.swing.JFrame {
         CountButton.setBackground(new java.awt.Color(0, 0, 0));
         CountButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         CountButton.setForeground(new java.awt.Color(255, 255, 255));
-        CountButton.setText("Egg/Fish Count");
-        CountButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        CountButton.setText("Egg/Fry Count");
+        CountButton.setBorder(null);
         CountButton.setBorderPainted(false);
         CountButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         CountButton.addActionListener(new java.awt.event.ActionListener() {

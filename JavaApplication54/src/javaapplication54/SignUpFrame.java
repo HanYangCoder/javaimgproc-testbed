@@ -58,6 +58,9 @@ public class SignUpFrame extends javax.swing.JFrame {
         DHAA = new javax.swing.JLabel();
         SignInButton = new javax.swing.JButton();
         FreshCountLabel = new javax.swing.JLabel();
+        Panel_1 = new javax.swing.JPanel();
+        Description = new javax.swing.JLabel();
+        Description_1 = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -153,6 +156,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         SignInButton.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         SignInButton.setForeground(new java.awt.Color(51, 153, 255));
         SignInButton.setText("Sign In");
+        SignInButton.setBorder(null);
         SignInButton.setContentAreaFilled(false);
         SignInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +207,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         PanelBGLayout.setVerticalGroup(
             PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBGLayout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(FirstName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +253,45 @@ public class SignUpFrame extends javax.swing.JFrame {
         FreshCountLabel.setForeground(new java.awt.Color(255, 255, 255));
         FreshCountLabel.setText("WELCOME!");
         Panel.add(FreshCountLabel);
-        FreshCountLabel.setBounds(720, 210, 400, 120);
+        FreshCountLabel.setBounds(710, 260, 400, 120);
+
+        Panel_1.setOpaque(false);
+
+        Description.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Description.setForeground(new java.awt.Color(255, 255, 255));
+        Description.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Description.setText("Monitor your fish growth with ease where you are a few");
+
+        Description_1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Description_1.setForeground(new java.awt.Color(255, 255, 255));
+        Description_1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Description_1.setText("clicks away from saving and collecting your data.");
+
+        javax.swing.GroupLayout Panel_1Layout = new javax.swing.GroupLayout(Panel_1);
+        Panel_1.setLayout(Panel_1Layout);
+        Panel_1Layout.setHorizontalGroup(
+            Panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Description_1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+            .addGroup(Panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        Panel_1Layout.setVerticalGroup(
+            Panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_1Layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(Description_1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
+            .addGroup(Panel_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Description, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(49, Short.MAX_VALUE)))
+        );
+
+        Panel.add(Panel_1);
+        Panel_1.setBounds(650, 350, 520, 100);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_Blue.jpg"))); // NOI18N
         Panel.add(Background);
@@ -278,7 +320,7 @@ public class SignUpFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
-        new ThesisJFrame().setVisible(true);
+        new HomeFrame().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_SignUpButtonActionPerformed
 
@@ -348,6 +390,8 @@ public class SignUpFrame extends javax.swing.JFrame {
     private javax.swing.JTextField ContactNumberField;
     private javax.swing.JLabel CreatePassword;
     private javax.swing.JLabel DHAA;
+    private javax.swing.JLabel Description;
+    private javax.swing.JLabel Description_1;
     private javax.swing.JLabel EmailAddress;
     private javax.swing.JTextField EmailAddressField;
     private javax.swing.JLabel FirstName;
@@ -357,6 +401,7 @@ public class SignUpFrame extends javax.swing.JFrame {
     private javax.swing.JTextField LastNameField;
     private javax.swing.JPanel Panel;
     private javax.swing.JPanel PanelBG;
+    private javax.swing.JPanel Panel_1;
     private javax.swing.JPasswordField PassField;
     private javax.swing.JCheckBox PasswordCheck;
     private javax.swing.JButton SignInButton;

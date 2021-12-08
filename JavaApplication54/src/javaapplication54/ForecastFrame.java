@@ -30,9 +30,19 @@ public class ForecastFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         Panel = new javax.swing.JPanel();
+        ChoicesPanel = new javax.swing.JPanel();
+        HomeButton = new javax.swing.JButton();
+        DatabaseButton = new javax.swing.JButton();
+        ForecastButton = new javax.swing.JButton();
+        Choices2Panel = new javax.swing.JPanel();
+        Separator = new javax.swing.JSeparator();
+        Users = new javax.swing.JButton();
+        EggFryCount = new javax.swing.JButton();
+        Forecast = new javax.swing.JButton();
+        DisplayField = new javax.swing.JTextField();
+        SearchField = new javax.swing.JTextField();
+        SearchButton = new javax.swing.JButton();
         ImgDisplay = new javax.swing.JLabel();
-        Panel2 = new javax.swing.JPanel();
-        RunTestButton = new javax.swing.JButton();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,45 +50,159 @@ public class ForecastFrame extends javax.swing.JFrame {
         Panel.setPreferredSize(new java.awt.Dimension(1920, 1080));
         Panel.setLayout(null);
 
-        ImgDisplay.setBackground(new java.awt.Color(255, 255, 255));
-        ImgDisplay.setOpaque(true);
-        Panel.add(ImgDisplay);
-        ImgDisplay.setBounds(70, 70, 780, 500);
+        ChoicesPanel.setOpaque(false);
 
-        Panel2.setOpaque(false);
-
-        RunTestButton.setBackground(new java.awt.Color(0, 0, 0));
-        RunTestButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        RunTestButton.setForeground(new java.awt.Color(255, 255, 255));
-        RunTestButton.setText("Run Test");
-        RunTestButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        RunTestButton.setBorderPainted(false);
-        RunTestButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        RunTestButton.addActionListener(new java.awt.event.ActionListener() {
+        HomeButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        HomeButton.setText("Home");
+        HomeButton.setBorder(null);
+        HomeButton.setBorderPainted(false);
+        HomeButton.setContentAreaFilled(false);
+        HomeButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        HomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RunTestButtonActionPerformed(evt);
+                HomeButtonActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout Panel2Layout = new javax.swing.GroupLayout(Panel2);
-        Panel2.setLayout(Panel2Layout);
-        Panel2Layout.setHorizontalGroup(
-            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Panel2Layout.createSequentialGroup()
-                .addGap(316, 316, 316)
-                .addComponent(RunTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(314, Short.MAX_VALUE))
+        DatabaseButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        DatabaseButton.setText("Egg/Fry Count");
+        DatabaseButton.setBorder(null);
+        DatabaseButton.setBorderPainted(false);
+        DatabaseButton.setContentAreaFilled(false);
+        DatabaseButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DatabaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DatabaseButtonActionPerformed(evt);
+            }
+        });
+
+        ForecastButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        ForecastButton.setText("Forecast");
+        ForecastButton.setBorder(null);
+        ForecastButton.setBorderPainted(false);
+        ForecastButton.setContentAreaFilled(false);
+        ForecastButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        javax.swing.GroupLayout ChoicesPanelLayout = new javax.swing.GroupLayout(ChoicesPanel);
+        ChoicesPanel.setLayout(ChoicesPanelLayout);
+        ChoicesPanelLayout.setHorizontalGroup(
+            ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ChoicesPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(HomeButton)
+                .addGap(29, 29, 29)
+                .addComponent(DatabaseButton)
+                .addGap(31, 31, 31)
+                .addComponent(ForecastButton)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
-        Panel2Layout.setVerticalGroup(
-            Panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel2Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addComponent(RunTestButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+        ChoicesPanelLayout.setVerticalGroup(
+            ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ChoicesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(HomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DatabaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ForecastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Panel.add(Panel2);
-        Panel2.setBounds(70, 570, 780, 93);
+        Panel.add(ChoicesPanel);
+        ChoicesPanel.setBounds(10, 10, 310, 60);
+
+        Choices2Panel.setOpaque(false);
+
+        Separator.setBackground(new java.awt.Color(0, 0, 0));
+        Separator.setForeground(new java.awt.Color(0, 0, 0));
+        Separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        Separator.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        Users.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Users.setText("Users");
+        Users.setBorder(null);
+        Users.setContentAreaFilled(false);
+        Users.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsersActionPerformed(evt);
+            }
+        });
+
+        EggFryCount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EggFryCount.setText("Previous Egg/Fry Count");
+        EggFryCount.setBorder(null);
+        EggFryCount.setContentAreaFilled(false);
+
+        Forecast.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Forecast.setText("Previous Forecast");
+        Forecast.setBorder(null);
+        Forecast.setContentAreaFilled(false);
+
+        javax.swing.GroupLayout Choices2PanelLayout = new javax.swing.GroupLayout(Choices2Panel);
+        Choices2Panel.setLayout(Choices2PanelLayout);
+        Choices2PanelLayout.setHorizontalGroup(
+            Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(EggFryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Forecast, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(198, Short.MAX_VALUE)))
+        );
+        Choices2PanelLayout.setVerticalGroup(
+            Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Choices2PanelLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(EggFryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(Forecast, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
+            .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                    .addContainerGap(85, Short.MAX_VALUE)
+                    .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(85, Short.MAX_VALUE)))
+        );
+
+        Panel.add(Choices2Panel);
+        Choices2Panel.setBounds(20, 80, 210, 530);
+
+        DisplayField.setEditable(false);
+        DisplayField.setBackground(new java.awt.Color(255, 255, 255));
+        DisplayField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        DisplayField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        DisplayField.setText("Forecast");
+        DisplayField.setBorder(null);
+        DisplayField.setOpaque(false);
+        Panel.add(DisplayField);
+        DisplayField.setBounds(410, 20, 100, 50);
+
+        SearchField.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        SearchField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search TestID", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12))); // NOI18N
+        SearchField.setOpaque(false);
+        Panel.add(SearchField);
+        SearchField.setBounds(410, 80, 260, 70);
+
+        SearchButton.setBackground(new java.awt.Color(0, 0, 0));
+        SearchButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        SearchButton.setForeground(new java.awt.Color(255, 255, 255));
+        SearchButton.setText("Search");
+        SearchButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        SearchButton.setBorderPainted(false);
+        SearchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Panel.add(SearchButton);
+        SearchButton.setBounds(690, 87, 140, 60);
+
+        ImgDisplay.setBackground(new java.awt.Color(255, 255, 255));
+        ImgDisplay.setOpaque(true);
+        Panel.add(ImgDisplay);
+        ImgDisplay.setBounds(410, 170, 780, 500);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_BG.png"))); // NOI18N
         Panel.add(Background);
@@ -100,9 +224,20 @@ public class ForecastFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RunTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTestButtonActionPerformed
-        
-    }//GEN-LAST:event_RunTestButtonActionPerformed
+    private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeButtonActionPerformed
+        new HomeFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_HomeButtonActionPerformed
+
+    private void DatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatabaseButtonActionPerformed
+        new DatabaseFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_DatabaseButtonActionPerformed
+
+    private void UsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersActionPerformed
+        new DatabaseFrame().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_UsersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,9 +276,19 @@ public class ForecastFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
+    private javax.swing.JPanel Choices2Panel;
+    private javax.swing.JPanel ChoicesPanel;
+    private javax.swing.JButton DatabaseButton;
+    private javax.swing.JTextField DisplayField;
+    private javax.swing.JButton EggFryCount;
+    private javax.swing.JButton Forecast;
+    private javax.swing.JButton ForecastButton;
+    private javax.swing.JButton HomeButton;
     private javax.swing.JLabel ImgDisplay;
     private javax.swing.JPanel Panel;
-    private javax.swing.JPanel Panel2;
-    private javax.swing.JButton RunTestButton;
+    private javax.swing.JButton SearchButton;
+    private javax.swing.JTextField SearchField;
+    private javax.swing.JSeparator Separator;
+    private javax.swing.JButton Users;
     // End of variables declaration//GEN-END:variables
 }
