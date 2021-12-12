@@ -4,7 +4,16 @@
  */
 package javaapplication54;
 
+import java.sql.*;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -15,9 +24,17 @@ public class DatabaseFrame extends javax.swing.JFrame {
     /**
      * Creates new form DatabaseFrame
      */
+    
+    UserDBController userDB;
+    EggFryCountDBController eggFryDB;
+    
     public DatabaseFrame() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+//        userDB = new UserDBController();
+//        eggFryDB = new EggFryCountDBController();
+        //showUserTable();
     }
 
     /**
@@ -39,9 +56,10 @@ public class DatabaseFrame extends javax.swing.JFrame {
         Users = new javax.swing.JButton();
         EggFryCount = new javax.swing.JButton();
         Forecast = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         DisplayField = new javax.swing.JTextField();
-        DataTable = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,11 +139,21 @@ public class DatabaseFrame extends javax.swing.JFrame {
         Users.setText("Users");
         Users.setBorder(null);
         Users.setContentAreaFilled(false);
+        Users.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsersActionPerformed(evt);
+            }
+        });
 
         EggFryCount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         EggFryCount.setText("Previous Egg/Fry Count");
         EggFryCount.setBorder(null);
         EggFryCount.setContentAreaFilled(false);
+        EggFryCount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EggFryCountActionPerformed(evt);
+            }
+        });
 
         Forecast.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Forecast.setText("Previous Forecast");
@@ -173,6 +201,15 @@ public class DatabaseFrame extends javax.swing.JFrame {
         DatabasePanel.add(Choices2Panel);
         Choices2Panel.setBounds(20, 80, 210, 530);
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        DatabasePanel.add(jButton1);
+        jButton1.setBounds(140, 557, 140, 80);
+
         DisplayField.setEditable(false);
         DisplayField.setBackground(new java.awt.Color(255, 255, 255));
         DisplayField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -181,41 +218,20 @@ public class DatabaseFrame extends javax.swing.JFrame {
         DisplayField.setBorder(null);
         DisplayField.setOpaque(false);
         DatabasePanel.add(DisplayField);
-        DisplayField.setBounds(410, 20, 160, 50);
+        DisplayField.setBounds(410, 20, 200, 50);
 
-        Table.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        Table.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "User ID", "First Name", "Last Name", "Contact Number", "Email", "Address"
+                "User ID", "First Name", "Last Name", "Password", "Contact Num", "Email", "Address"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        Table.setGridColor(new java.awt.Color(255, 255, 255));
-        Table.setOpaque(false);
-        Table.setPreferredSize(new java.awt.Dimension(450, 0));
-        DataTable.setViewportView(Table);
-
-        DatabasePanel.add(DataTable);
-        DataTable.setBounds(410, 90, 820, 550);
+        DatabasePanel.add(jScrollPane1);
+        jScrollPane1.setBounds(410, 90, 820, 580);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_BG.png"))); // NOI18N
         DatabasePanel.add(Background);
@@ -254,6 +270,285 @@ public class DatabaseFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_ForecastActionPerformed
 
+    private void UsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+            ConnController dbConn = new ConnController();
+            Connection userConn;
+            userConn = dbConn.getConnection();
+            Statement getUsersStmt = userConn.createStatement();
+            String getUsersSQL = "SELECT * FROM userDB";
+            ResultSet userList = getUsersStmt.executeQuery(getUsersSQL);
+            
+            while(userList.next()){
+                
+                String userID = String.valueOf(userList.getInt("userID"));
+                String firstName = userList.getString("firstName");
+                String lastName = userList.getString("lastName");
+                String password = userList.getString("password");
+                String contactNum = userList.getString("contactNum");
+                String email = userList.getString("email");
+                String address = userList.getString("address");
+                
+                System.out.println(userID+firstName+lastName+password+contactNum+email+address);
+                
+                //String tbData[] = {userID, firstName, lastName, password, contactNum, email, address};
+                
+                DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
+                tbModel.addRow(new Object[]{userID,firstName,lastName,password,contactNum,email,address});
+                //table.setModel(tbModel);
+                
+            }
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_UsersActionPerformed
+
+    private void EggFryCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EggFryCountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EggFryCountActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+            
+            ConnController dbConn = new ConnController();
+            Connection userConn;
+            userConn = dbConn.getConnection();
+            Statement getUsersStmt = userConn.createStatement();
+            String getUsersSQL = "SELECT * FROM userDB";
+            ResultSet userList = getUsersStmt.executeQuery(getUsersSQL);
+            
+            while(userList.next()){
+                
+                String userID = String.valueOf(userList.getInt("userID"));
+                String firstName = userList.getString("firstName");
+                String lastName = userList.getString("lastName");
+                String password = userList.getString("password");
+                String contactNum = userList.getString("contactNum");
+                String email = userList.getString("email");
+                String address = userList.getString("address");
+                
+                System.out.println(userID+firstName+lastName+password+contactNum+email+address);
+                
+                //String tbData[] = {userID, firstName, lastName, password, contactNum, email, address};
+                
+                DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
+                tbModel.addRow(new Object[]{userID,firstName,lastName,password,contactNum,email,address});
+                //table.setModel(tbModel);
+                
+            }
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void showUserTable(){
+        /*DefaultTableModel model = new DefaultTableModel();
+        String[] columnNames = {"User ID","First Name","Last Name","Contact Number","E-mail","Address"};
+        model.setColumnIdentifiers(columnNames);
+        
+        table.setModel(model);*/
+//        ResultSet userList = null;
+        
+//        JScrollPane scroll = new JScrollPane(table);
+//        scroll.setHorizontalScrollBarPolicy(
+//        JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        scroll.setVerticalScrollBarPolicy(
+//        JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
+//        try {
+//            table = new JTable(buildTableModel(userDB.getUserList()));
+//            
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",
+//            JOptionPane.ERROR_MESSAGE);
+//        }
+        
+        
+            /*
+            String uID = "";
+            String fName = "";
+            String lName = "";
+            String conNum = "";
+            String email = "";
+            String address = "";
+            
+            try {
+            
+            userList = userDB.getUserList();
+            int i=0;
+            
+            if(userList.next())
+            {
+            uID = userList.getString("userID");
+            fName = userList.getString("firstName");
+            lName = userList.getString("lastName");
+            conNum = userList.getString("contactNum");
+            email = userList.getString("email");
+            address = userList.getString("address");
+            model.addRow(new Object[]{uID,fName,lName,conNum,email,address});
+            i++;
+            }
+            
+            System.out.println("user table created");
+            
+            if(i < 1)
+            {
+            JOptionPane.showMessageDialog(null, "No Record Found","Error",
+            JOptionPane.ERROR_MESSAGE);
+            }
+            else if(i == 1)
+            {
+            System.out.println(i+" Record Found");
+            }
+            else
+            {
+            System.out.println(i+" Records Found");
+            }
+            
+            } catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Error",
+            JOptionPane.ERROR_MESSAGE);
+            }
+            */
+            
+            //table.setModel(DbUtils.resultSetToTableModel(userList.getUserList()));
+            
+        try {
+            ConnController dbConn = new ConnController();
+            Connection userConn;
+            userConn = dbConn.getConnection();
+            Statement getUsersStmt = userConn.createStatement();
+            String getUsersSQL = "SELECT * FROM userDB";
+            ResultSet userList = getUsersStmt.executeQuery(getUsersSQL);
+            System.out.println("Retrieved data from database");
+            
+//            if(userList.next())
+//            {
+//                String firstName = userList.getString("firstName");
+//                System.out.println("Hello user "+firstName);
+//            }
+            
+            jTable1.setModel(DbUtils.resultSetToTableModel(userList));
+//            table = new JTable(buildTableModel(userList));
+//            JOptionPane.showMessageDialog(null, new JScrollPane(table));
+
+//            while(table.getRowCount() > 0) 
+//            {
+//                ((DefaultTableModel) table.getModel()).removeRow(0);
+//            }
+//            int columns = userList.getMetaData().getColumnCount();
+//            while(userList.next())
+//            {  
+//                Object[] row = new Object[columns];
+//                for (int i = 1; i <= columns; i++)
+//                {  
+//                    row[i - 1] = userList.getObject(i);
+//                }
+//                ((DefaultTableModel) table.getModel()).insertRow(userList.getRow()-1,row);
+//            }
+            
+//            ResultSetMetaData rsmd = userList.getMetaData();
+//            int columnsNumber = rsmd.getColumnCount();
+//            while (userList.next()) {
+//                for (int i = 1; i <= columnsNumber; i++) {
+//                    if (i > 1) System.out.print(",  ");
+//                    String columnValue = userList.getString(i);
+//                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+//                }
+//                System.out.println("");
+//            }
+            
+//            userConn.close();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+    }
+    
+    private void getUserTable(){
+        
+        DefaultTableModel model = new DefaultTableModel();
+        String[] columnNames = {"User ID","First Name","Last Name","Password","Contact Number","E-mail","Address"};
+        model.setColumnIdentifiers(columnNames);
+        
+        jTable1.setModel(model);
+        
+        try{
+            
+            ConnController dbConn = new ConnController();
+            Connection userConn;
+            userConn = dbConn.getConnection();
+            Statement getUsersStmt = userConn.createStatement();
+            String getUsersSQL = "SELECT * FROM userDB";
+            ResultSet userList = getUsersStmt.executeQuery(getUsersSQL);
+            
+            while(userList.next()){
+                
+                String userID = String.valueOf(userList.getInt("userID"));
+                String firstName = userList.getString("firstName");
+                String lastName = userList.getString("lastName");
+                String password = userList.getString("password");
+                String contactNum = userList.getString("contactNum");
+                String email = userList.getString("email");
+                String address = userList.getString("address");
+                
+                String tbData[] = {userID, firstName, lastName, password, contactNum, email, address};
+                
+                DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
+                tbModel.addRow(tbData);
+                
+            }
+            
+            
+//            ResultSetMetaData rsmd = userList.getMetaData();
+//            int columnsNumber = rsmd.getColumnCount();
+//            while (userList.next()) {
+//                for (int i = 1; i <= columnsNumber; i++) {
+//                    if (i > 1) System.out.print(",  ");
+//                    String columnValue = userList.getString(i);
+//                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
+//                }
+//                System.out.println("");
+//            }
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static DefaultTableModel buildTableModel(ResultSet rs)
+        throws SQLException {
+
+    ResultSetMetaData metaData = rs.getMetaData();
+
+    // names of columns
+    Vector<String> columnNames = new Vector<String>();
+    int columnCount = metaData.getColumnCount();
+    for (int column = 1; column <= columnCount; column++) {
+        columnNames.add(metaData.getColumnName(column));
+    }
+
+    // data of the table
+    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+    while (rs.next()) {
+        Vector<Object> vector = new Vector<Object>();
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+            vector.add(rs.getObject(columnIndex));
+        }
+        data.add(vector);
+    }
+
+    return new DefaultTableModel(data, columnNames);
+
+}
+    
     /**
      * @param args the command line arguments
      */
@@ -293,7 +588,6 @@ public class DatabaseFrame extends javax.swing.JFrame {
     private javax.swing.JLabel Background;
     private javax.swing.JPanel Choices2Panel;
     private javax.swing.JPanel ChoicesPanel;
-    private javax.swing.JScrollPane DataTable;
     private javax.swing.JPanel DatabasePanel;
     private javax.swing.JTextField DisplayField;
     private javax.swing.JButton EggFryCount;
@@ -302,7 +596,9 @@ public class DatabaseFrame extends javax.swing.JFrame {
     private javax.swing.JButton HomeButton;
     private javax.swing.JButton ImgProcButton;
     private javax.swing.JSeparator Separator;
-    private javax.swing.JTable Table;
     private javax.swing.JButton Users;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
