@@ -15,9 +15,18 @@ public class HomeFrame extends javax.swing.JFrame {
     /**
      * Creates new form HomeFrame
      */
+    
+    String userID = "";
+    
     public HomeFrame() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+    
+    public HomeFrame(String userID) {
+        initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.userID = userID;
     }
 
     /**
@@ -122,12 +131,12 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ForecastButtonActionPerformed
 
     private void RecordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecordButtonActionPerformed
-        new DatabaseFrame().setVisible(true);
+        new DatabaseFrame(userID).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_RecordButtonActionPerformed
 
     private void CountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CountButtonActionPerformed
-        new ThesisJFrame().setVisible(true);
+        new ThesisJFrame(userID).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_CountButtonActionPerformed
 

@@ -27,7 +27,7 @@ public class UserDBController {
         
     }
         
-    public boolean userLogin(int userID, String password){
+    public boolean userLogin(String userID, String password){
         
         String u1 = null, p1 = null;
         boolean userLogin = false;
@@ -44,7 +44,7 @@ public class UserDBController {
                 p1 = user.getString("password");
             }
             
-            if(String.valueOf(userID).equals(u1) && password.equals(p1))
+            if(userID.equals(u1) && password.equals(p1))
             {
                 System.out.println("Login successful");
                 userLogin = true;
@@ -69,7 +69,9 @@ public class UserDBController {
         return userLogin;
     }
     
-    public void createUser(String firstName, String lastName, String password, String contactNum, String email, String address){
+    public String createUser(String firstName, String lastName, String password, String contactNum, String email, String address){
+        
+        String newestUserID = "";
         
         try{
             userConn = dbConn.getConnection();
@@ -83,8 +85,16 @@ public class UserDBController {
             
             System.out.println("User successfully added!");
             
-        }catch (SQLException e){
+            Statement getNewestUser = userConn.createStatement();
+            String getNewestSQL = "SELECT * FROM userDB ORDER BY userID DESC LIMIT 1";
+            ResultSet newUser = getNewestUser.executeQuery(getNewestSQL);
             
+            while(newUser.next()){
+                newestUserID = String.valueOf(newUser.getInt("userID"));
+            }
+            
+        }catch (SQLException e){
+            System.out.println(e);
         }
         
         //Closes the  connection
@@ -96,6 +106,7 @@ public class UserDBController {
               System.out.println(e);
           }
         }
+        return newestUserID;
     }
     
     public ResultSet getUserList(){

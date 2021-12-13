@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -169,16 +170,18 @@ public class SignUpFrame extends javax.swing.JFrame {
         PanelBGLayout.setHorizontalGroup(
             PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBGLayout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Address)
+                    .addComponent(ConfirmPassword)
+                    .addComponent(CreatePassword)
+                    .addComponent(ConfirmPassField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PassField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(PanelBGLayout.createSequentialGroup()
                             .addComponent(EmailAddress)
                             .addGap(285, 285, 285))
-                        .addGroup(PanelBGLayout.createSequentialGroup()
-                            .addComponent(Address)
-                            .addGap(317, 317, 317))
                         .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(LastName, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LastNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,13 +191,9 @@ public class SignUpFrame extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(FirstName, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CreatePassword)
-                            .addComponent(PassField, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(PasswordCheck)
-                            .addComponent(SignUpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ConfirmPassword)
-                            .addComponent(ConfirmPassField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(SignUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(ContactNumberField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(EmailAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelBGLayout.createSequentialGroup()
@@ -207,7 +206,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         PanelBGLayout.setVerticalGroup(
             PanelBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelBGLayout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(53, Short.MAX_VALUE)
                 .addComponent(FirstName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,9 +250,10 @@ public class SignUpFrame extends javax.swing.JFrame {
 
         FreshCountLabel.setFont(new java.awt.Font("Segoe UI", 1, 75)); // NOI18N
         FreshCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        FreshCountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         FreshCountLabel.setText("WELCOME!");
         Panel.add(FreshCountLabel);
-        FreshCountLabel.setBounds(710, 260, 400, 120);
+        FreshCountLabel.setBounds(650, 260, 520, 120);
 
         Panel_1.setOpaque(false);
 
@@ -291,7 +291,7 @@ public class SignUpFrame extends javax.swing.JFrame {
         );
 
         Panel.add(Panel_1);
-        Panel_1.setBounds(650, 350, 520, 100);
+        Panel_1.setBounds(650, 350, 520, 101);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_Blue.jpg"))); // NOI18N
         Panel.add(Background);
@@ -320,8 +320,49 @@ public class SignUpFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed
-        new HomeFrame().setVisible(true);
-        this.setVisible(false);
+        
+        UserDBController userSignup = new UserDBController();
+        
+        String firstName = FirstNameField.getText();
+        String lastName = LastNameField.getText();
+        String contactNum = ContactNumberField.getText();
+        String address = AddressField.getText();
+        String email = EmailAddressField.getText();
+        String password = PassField.getText();
+        String confirmPassword = ConfirmPassField.getText();
+        String newUserID = "";
+        
+        // checks for an empty field
+        if(FirstNameField.getText().isEmpty() || LastNameField.getText().isEmpty()||
+                ContactNumberField.getText().isEmpty() || AddressField.getText().isEmpty()
+                || EmailAddressField.getText().isEmpty() || PassField.getText().isEmpty()
+                || ConfirmPassField.getText().isEmpty()){
+            
+            System.out.println("Empty field");
+            JOptionPane.showMessageDialog(null, "Please fill out all the required fields.");
+        }
+        
+        else{
+            System.out.println("All fields have input");
+            
+            // checks if password re-input is correct
+            if(password.equals(confirmPassword)){
+                
+                System.out.println("Password matches");
+                newUserID = userSignup.createUser(firstName, lastName, password, contactNum, email, address);
+                
+                System.out.println("New user created, userID #" + newUserID);
+                String message = "Hello "+firstName+"! Your userID is: "+newUserID;
+                JOptionPane.showMessageDialog(null, message);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Please confirm again your password");
+            }
+        }
+        
+        
+//        new HomeFrame().setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_SignUpButtonActionPerformed
 
     private void SignInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInButtonActionPerformed

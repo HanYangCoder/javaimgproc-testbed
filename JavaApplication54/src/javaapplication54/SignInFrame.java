@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -261,8 +262,22 @@ public class SignInFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordCheckActionPerformed
 
     private void SignInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInButtonActionPerformed
-        new HomeFrame().setVisible(true);
-        this.setVisible(false);
+        
+        UserDBController userLogin = new UserDBController();
+        String userID = UserIDField.getText();
+        String password = PasswordField.getText();
+        
+        if(userLogin.userLogin(userID, password))
+        {
+            System.out.println("Successful login!");
+            new HomeFrame(userID).setVisible(true);
+            this.setVisible(false);
+        }
+        else{
+            System.out.println("Login failed! UserID:"+userID+" PW:"+password);
+            JOptionPane.showMessageDialog(null, "Username or password is incorrect");
+        }
+        
     }//GEN-LAST:event_SignInButtonActionPerformed
 
     private void SignUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpButtonActionPerformed

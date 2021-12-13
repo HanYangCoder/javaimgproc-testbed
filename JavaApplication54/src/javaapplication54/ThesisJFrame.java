@@ -48,12 +48,19 @@ public class ThesisJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    String userID = "";
     String filename;
+    
     public ThesisJFrame() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-
+    
+    public ThesisJFrame(String userID) {
+        initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.userID = userID;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,6 +127,11 @@ public class ThesisJFrame extends javax.swing.JFrame {
         ForecastButton.setBorderPainted(false);
         ForecastButton.setContentAreaFilled(false);
         ForecastButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        ForecastButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ForecastButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ChoicesPanelLayout = new javax.swing.GroupLayout(ChoicesPanel);
         ChoicesPanel.setLayout(ChoicesPanelLayout);
@@ -342,14 +354,18 @@ public class ThesisJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_SaveTestButtonActionPerformed
 
     private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeButtonActionPerformed
-        new HomeFrame().setVisible(true);
+        new HomeFrame(userID).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_HomeButtonActionPerformed
 
     private void DatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatabaseButtonActionPerformed
-        new DatabaseFrame().setVisible(true);
+        new DatabaseFrame(userID).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_DatabaseButtonActionPerformed
+
+    private void ForecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ForecastButtonActionPerformed
 
     /**
      * @param args the command line arguments

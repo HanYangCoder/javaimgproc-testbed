@@ -139,6 +139,9 @@
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="10"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ForecastButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

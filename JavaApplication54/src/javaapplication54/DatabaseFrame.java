@@ -25,6 +25,8 @@ public class DatabaseFrame extends javax.swing.JFrame {
      * Creates new form DatabaseFrame
      */
     
+    String userID = "";
+    
     UserDBController userDB;
     EggFryCountDBController eggFryDB;
     
@@ -35,6 +37,12 @@ public class DatabaseFrame extends javax.swing.JFrame {
 //        userDB = new UserDBController();
 //        eggFryDB = new EggFryCountDBController();
         //showUserTable();
+    }
+    
+    public DatabaseFrame(String userID) {
+        initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.userID = userID;
     }
 
     /**
@@ -267,12 +275,12 @@ public class DatabaseFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeButtonActionPerformed
-        new HomeFrame().setVisible(true);
+        new HomeFrame(userID).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_HomeButtonActionPerformed
 
     private void ImgProcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImgProcButtonActionPerformed
-        new ThesisJFrame().setVisible(true);
+        new ThesisJFrame(userID).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_ImgProcButtonActionPerformed
 
