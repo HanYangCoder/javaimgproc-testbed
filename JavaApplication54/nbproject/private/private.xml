@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/SplashScreenCode.java</file>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/ForecastFrame.java</file>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/SplashScreen.java</file>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/SignInFrame.java</file>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/HomeFrame.java</file>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/ThesisJFrame.java</file>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/CodeGoesHere.java</file>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/SignUpFrame.java</file>
-            <file>file:/C:/Users/hyacinth%20mioten/Documents/GitHub/javaimgproc-testbed/JavaApplication54/src/javaapplication54/DatabaseFrame.java</file>
+            <file>file:/home/hansherrera/development/projects/thesis/javaimgproc-testbed/JavaApplication54/src/javaapplication54/SplashScreenCode.java</file>
+            <file>file:/home/hansherrera/development/projects/thesis/javaimgproc-testbed/JavaApplication54/src/javaapplication54/UserDBController.java</file>
+            <file>file:/home/hansherrera/development/projects/thesis/javaimgproc-testbed/JavaApplication54/src/javaapplication54/ThesisJFrame.java</file>
+            <file>file:/home/hansherrera/development/projects/thesis/javaimgproc-testbed/JavaApplication54/src/javaapplication54/DatabaseFrame.java</file>
+            <file>file:/home/hansherrera/development/projects/thesis/javaimgproc-testbed/JavaApplication54/src/javaapplication54/SplashScreen.java</file>
+            <file>file:/home/hansherrera/development/projects/thesis/javaimgproc-testbed/JavaApplication54/src/javaapplication54/ConnController.java</file>
         </group>
     </open-files>
 </project-private>

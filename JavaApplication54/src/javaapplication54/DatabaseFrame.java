@@ -54,9 +54,9 @@ public class DatabaseFrame extends javax.swing.JFrame {
         Choices2Panel = new javax.swing.JPanel();
         Separator = new javax.swing.JSeparator();
         Users = new javax.swing.JButton();
-        EggFryCount = new javax.swing.JButton();
-        Forecast = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        EggCount = new javax.swing.JButton();
+        FryCount = new javax.swing.JButton();
+        PreviousForecast = new javax.swing.JButton();
         DisplayField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -100,6 +100,11 @@ public class DatabaseFrame extends javax.swing.JFrame {
         ForecastButton.setBorderPainted(false);
         ForecastButton.setContentAreaFilled(false);
         ForecastButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        ForecastButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ForecastButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ChoicesPanelLayout = new javax.swing.GroupLayout(ChoicesPanel);
         ChoicesPanel.setLayout(ChoicesPanelLayout);
@@ -145,23 +150,33 @@ public class DatabaseFrame extends javax.swing.JFrame {
             }
         });
 
-        EggFryCount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        EggFryCount.setText("Previous Egg/Fry Count");
-        EggFryCount.setBorder(null);
-        EggFryCount.setContentAreaFilled(false);
-        EggFryCount.addActionListener(new java.awt.event.ActionListener() {
+        EggCount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EggCount.setText("Previous Egg Count Records");
+        EggCount.setBorder(null);
+        EggCount.setContentAreaFilled(false);
+        EggCount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EggFryCountActionPerformed(evt);
+                EggCountActionPerformed(evt);
             }
         });
 
-        Forecast.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Forecast.setText("Previous Forecast");
-        Forecast.setBorder(null);
-        Forecast.setContentAreaFilled(false);
-        Forecast.addActionListener(new java.awt.event.ActionListener() {
+        FryCount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        FryCount.setText("Previous Fry Count Records");
+        FryCount.setBorder(null);
+        FryCount.setContentAreaFilled(false);
+        FryCount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ForecastActionPerformed(evt);
+                FryCountActionPerformed(evt);
+            }
+        });
+
+        PreviousForecast.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        PreviousForecast.setText("Previous Forecast");
+        PreviousForecast.setBorder(null);
+        PreviousForecast.setContentAreaFilled(false);
+        PreviousForecast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PreviousForecastActionPerformed(evt);
             }
         });
 
@@ -169,28 +184,34 @@ public class DatabaseFrame extends javax.swing.JFrame {
         Choices2Panel.setLayout(Choices2PanelLayout);
         Choices2PanelLayout.setHorizontalGroup(
             Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Choices2PanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(EggCount, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(Users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
-                .addGap(0, 20, Short.MAX_VALUE)
-                .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(EggFryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Forecast, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(FryCount, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                    .addComponent(PreviousForecast, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(198, Short.MAX_VALUE)))
+                    .addContainerGap(264, Short.MAX_VALUE)))
         );
         Choices2PanelLayout.setVerticalGroup(
             Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Choices2PanelLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                .addContainerGap(146, Short.MAX_VALUE)
                 .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(EggFryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EggCount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(Forecast, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addComponent(FryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(PreviousForecast, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144))
             .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
                     .addContainerGap(85, Short.MAX_VALUE)
@@ -199,26 +220,16 @@ public class DatabaseFrame extends javax.swing.JFrame {
         );
 
         DatabasePanel.add(Choices2Panel);
-        Choices2Panel.setBounds(20, 80, 210, 530);
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        DatabasePanel.add(jButton1);
-        jButton1.setBounds(140, 557, 140, 80);
+        Choices2Panel.setBounds(20, 80, 280, 530);
 
         DisplayField.setEditable(false);
         DisplayField.setBackground(new java.awt.Color(255, 255, 255));
         DisplayField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         DisplayField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        DisplayField.setText("Users' Record");
+        DisplayField.setText("User Records");
         DisplayField.setBorder(null);
-        DisplayField.setOpaque(false);
         DatabasePanel.add(DisplayField);
-        DisplayField.setBounds(410, 20, 200, 50);
+        DisplayField.setBounds(600, 20, 420, 50);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -265,10 +276,24 @@ public class DatabaseFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_ImgProcButtonActionPerformed
 
-    private void ForecastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastActionPerformed
-        new ForecastFrame().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_ForecastActionPerformed
+    private void FryCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FryCountActionPerformed
+        try{
+            
+            ConnController dbConn = new ConnController();
+            Connection userConn;
+            userConn = dbConn.getConnection();
+            Statement getUsersStmt = userConn.createStatement();
+            String getUsersSQL = "SELECT * FROM FryImgCountDB";
+            ResultSet userList = getUsersStmt.executeQuery(getUsersSQL);
+            
+            jTable1.setModel(DbUtils.resultSetToTableModel(userList));
+            
+            DisplayField.setText("Fish Fry Count Records");
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_FryCountActionPerformed
 
     private void UsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersActionPerformed
         // TODO add your handling code here:
@@ -278,10 +303,11 @@ public class DatabaseFrame extends javax.swing.JFrame {
             Connection userConn;
             userConn = dbConn.getConnection();
             Statement getUsersStmt = userConn.createStatement();
-            String getUsersSQL = "SELECT * FROM userDB";
+            String getUsersSQL = "SELECT userID,firstName,lastName,contactNum,"
+                    + "email,address FROM userDB";
             ResultSet userList = getUsersStmt.executeQuery(getUsersSQL);
             
-            while(userList.next()){
+            /*while(userList.next()){
                 
                 String userID = String.valueOf(userList.getInt("userID"));
                 String firstName = userList.getString("firstName");
@@ -299,53 +325,45 @@ public class DatabaseFrame extends javax.swing.JFrame {
                 tbModel.addRow(new Object[]{userID,firstName,lastName,password,contactNum,email,address});
                 //table.setModel(tbModel);
                 
-            }
+            }*/
+            jTable1.setModel(DbUtils.resultSetToTableModel(userList));
+            
+            DisplayField.setText("User Records");
             
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_UsersActionPerformed
 
-    private void EggFryCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EggFryCountActionPerformed
+    private void EggCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EggCountActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EggFryCountActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
         try{
             
             ConnController dbConn = new ConnController();
             Connection userConn;
             userConn = dbConn.getConnection();
             Statement getUsersStmt = userConn.createStatement();
-            String getUsersSQL = "SELECT * FROM userDB";
+            String getUsersSQL = "SELECT * FROM EggImgCountDB";
             ResultSet userList = getUsersStmt.executeQuery(getUsersSQL);
             
-            while(userList.next()){
-                
-                String userID = String.valueOf(userList.getInt("userID"));
-                String firstName = userList.getString("firstName");
-                String lastName = userList.getString("lastName");
-                String password = userList.getString("password");
-                String contactNum = userList.getString("contactNum");
-                String email = userList.getString("email");
-                String address = userList.getString("address");
-                
-                System.out.println(userID+firstName+lastName+password+contactNum+email+address);
-                
-                //String tbData[] = {userID, firstName, lastName, password, contactNum, email, address};
-                
-                DefaultTableModel tbModel = (DefaultTableModel) jTable1.getModel();
-                tbModel.addRow(new Object[]{userID,firstName,lastName,password,contactNum,email,address});
-                //table.setModel(tbModel);
-                
-            }
+            jTable1.setModel(DbUtils.resultSetToTableModel(userList));
+            
+            DisplayField.setText("Fish Egg Count Records");
             
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_EggCountActionPerformed
+
+    private void PreviousForecastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousForecastActionPerformed
+        // TODO add your handling code here:
+        //new ForecastFrame().setVisible(true);
+        //this.setVisible(false);
+    }//GEN-LAST:event_PreviousForecastActionPerformed
+
+    private void ForecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ForecastButtonActionPerformed
 
     private void showUserTable(){
         /*DefaultTableModel model = new DefaultTableModel();
@@ -590,14 +608,14 @@ public class DatabaseFrame extends javax.swing.JFrame {
     private javax.swing.JPanel ChoicesPanel;
     private javax.swing.JPanel DatabasePanel;
     private javax.swing.JTextField DisplayField;
-    private javax.swing.JButton EggFryCount;
-    private javax.swing.JButton Forecast;
+    private javax.swing.JButton EggCount;
     private javax.swing.JButton ForecastButton;
+    private javax.swing.JButton FryCount;
     private javax.swing.JButton HomeButton;
     private javax.swing.JButton ImgProcButton;
+    private javax.swing.JButton PreviousForecast;
     private javax.swing.JSeparator Separator;
     private javax.swing.JButton Users;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
