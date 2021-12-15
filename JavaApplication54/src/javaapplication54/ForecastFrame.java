@@ -4,7 +4,27 @@
  */
 package javaapplication54;
 
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.block.BlockBorder;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.title.TextTitle;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -36,13 +56,15 @@ public class ForecastFrame extends javax.swing.JFrame {
         ForecastButton = new javax.swing.JButton();
         Choices2Panel = new javax.swing.JPanel();
         Separator = new javax.swing.JSeparator();
-        Users = new javax.swing.JButton();
-        EggFryCount = new javax.swing.JButton();
-        Forecast = new javax.swing.JButton();
+        startFryIDTextField = new javax.swing.JTextField();
+        endFryIDTextField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         DisplayField = new javax.swing.JTextField();
-        SearchField = new javax.swing.JTextField();
-        SearchButton = new javax.swing.JButton();
-        ImgDisplay = new javax.swing.JLabel();
+        RunTestBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,11 +99,16 @@ public class ForecastFrame extends javax.swing.JFrame {
         });
 
         ForecastButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        ForecastButton.setText("Forecast");
+        ForecastButton.setText("View Records");
         ForecastButton.setBorder(null);
         ForecastButton.setBorderPainted(false);
         ForecastButton.setContentAreaFilled(false);
         ForecastButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        ForecastButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ForecastButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ChoicesPanelLayout = new javax.swing.GroupLayout(ChoicesPanel);
         ChoicesPanel.setLayout(ChoicesPanelLayout);
@@ -93,8 +120,8 @@ public class ForecastFrame extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(DatabaseButton)
                 .addGap(31, 31, 31)
-                .addComponent(ForecastButton)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(ForecastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ChoicesPanelLayout.setVerticalGroup(
             ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +135,7 @@ public class ForecastFrame extends javax.swing.JFrame {
         );
 
         Panel.add(ChoicesPanel);
-        ChoicesPanel.setBounds(10, 10, 310, 60);
+        ChoicesPanel.setBounds(10, 10, 370, 60);
 
         Choices2Panel.setOpaque(false);
 
@@ -117,61 +144,71 @@ public class ForecastFrame extends javax.swing.JFrame {
         Separator.setOrientation(javax.swing.SwingConstants.VERTICAL);
         Separator.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        Users.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Users.setText("Users");
-        Users.setBorder(null);
-        Users.setContentAreaFilled(false);
-        Users.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsersActionPerformed(evt);
+        startFryIDTextField.setFont(new java.awt.Font("Fira Sans Semi-Light", 0, 18)); // NOI18N
+
+        endFryIDTextField.setFont(new java.awt.Font("Fira Sans Semi-Light", 0, 18)); // NOI18N
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "fryTestID", "survivalRate", "testDate", "userID"
             }
-        });
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        EggFryCount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        EggFryCount.setText("Previous Egg/Fry Count");
-        EggFryCount.setBorder(null);
-        EggFryCount.setContentAreaFilled(false);
+        jLabel1.setFont(new java.awt.Font("Fira Sans Semi-Light", 0, 18)); // NOI18N
+        jLabel1.setText("End fry count ID:");
 
-        Forecast.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Forecast.setText("Previous Forecast");
-        Forecast.setBorder(null);
-        Forecast.setContentAreaFilled(false);
+        jLabel2.setFont(new java.awt.Font("Fira Sans Semi-Light", 0, 18)); // NOI18N
+        jLabel2.setText("Start fry count ID:");
 
         javax.swing.GroupLayout Choices2PanelLayout = new javax.swing.GroupLayout(Choices2Panel);
         Choices2Panel.setLayout(Choices2PanelLayout);
         Choices2PanelLayout.setHorizontalGroup(
             Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
-                .addGap(0, 20, Short.MAX_VALUE)
-                .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(EggFryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Forecast, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(198, Short.MAX_VALUE)))
+            .addGroup(Choices2PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(startFryIDTextField)
+                    .addComponent(endFryIDTextField)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Choices2PanelLayout.createSequentialGroup()
+                        .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         Choices2PanelLayout.setVerticalGroup(
             Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
+                .addContainerGap(85, Short.MAX_VALUE)
+                .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(Choices2PanelLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(EggFryCount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(Forecast, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
-            .addGroup(Choices2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Choices2PanelLayout.createSequentialGroup()
-                    .addContainerGap(85, Short.MAX_VALUE)
-                    .addComponent(Separator, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(85, Short.MAX_VALUE)))
+                .addGap(45, 45, 45)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startFryIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(endFryIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         Panel.add(Choices2Panel);
-        Choices2Panel.setBounds(20, 80, 210, 530);
+        Choices2Panel.setBounds(10, 80, 380, 530);
 
         DisplayField.setEditable(false);
         DisplayField.setBackground(new java.awt.Color(255, 255, 255));
@@ -181,28 +218,31 @@ public class ForecastFrame extends javax.swing.JFrame {
         DisplayField.setBorder(null);
         DisplayField.setOpaque(false);
         Panel.add(DisplayField);
-        DisplayField.setBounds(410, 20, 100, 50);
+        DisplayField.setBounds(410, 20, 230, 50);
 
-        SearchField.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        SearchField.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Search TestID", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12))); // NOI18N
-        SearchField.setOpaque(false);
-        Panel.add(SearchField);
-        SearchField.setBounds(410, 80, 260, 70);
+        RunTestBtn.setFont(new java.awt.Font("Fira Sans Semi-Light", 1, 18)); // NOI18N
+        RunTestBtn.setText("Run Forecast");
+        RunTestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RunTestBtnActionPerformed(evt);
+            }
+        });
+        Panel.add(RunTestBtn);
+        RunTestBtn.setBounds(120, 640, 190, 50);
 
-        SearchButton.setBackground(new java.awt.Color(0, 0, 0));
-        SearchButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        SearchButton.setForeground(new java.awt.Color(255, 255, 255));
-        SearchButton.setText("Search");
-        SearchButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        SearchButton.setBorderPainted(false);
-        SearchButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Panel.add(SearchButton);
-        SearchButton.setBounds(690, 87, 140, 60);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 820, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 530, Short.MAX_VALUE)
+        );
 
-        ImgDisplay.setBackground(new java.awt.Color(255, 255, 255));
-        ImgDisplay.setOpaque(true);
-        Panel.add(ImgDisplay);
-        ImgDisplay.setBounds(410, 170, 780, 500);
+        Panel.add(jPanel1);
+        jPanel1.setBounds(410, 100, 820, 530);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_BG.png"))); // NOI18N
         Panel.add(Background);
@@ -234,10 +274,138 @@ public class ForecastFrame extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_DatabaseButtonActionPerformed
 
-    private void UsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersActionPerformed
-        new DatabaseFrame().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_UsersActionPerformed
+    private void RunTestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTestBtnActionPerformed
+        // TODO add your handling code here:
+        // SELECT `fryTestID`, `survivalRate`, `testDate`,`userID` FROM `FryImgCountDB` WHERE fryTestID BETWEEN 2 AND 9
+        
+        jPanel1.setLayout(new java.awt.BorderLayout());
+        
+        final XYSeriesCollection dataset = new XYSeriesCollection();
+        
+        if(startFryIDTextField.getText().isEmpty() || endFryIDTextField.getText().isEmpty())
+        {
+            System.out.println("Empty field");
+            JOptionPane.showMessageDialog(null, "Please input the fry test range you want to test");
+            
+        }
+        
+        else{
+            String startFryID = startFryIDTextField.getText();
+            String endFryID = endFryIDTextField.getText();
+            int period = 3;
+            SimpleMovingAverage smaObj = new SimpleMovingAverage(period);
+            int sampleSize = Integer.valueOf(endFryID) - Integer.valueOf(startFryID) + 1;
+            double[] fryIndex = new double[sampleSize];
+            double[] actualSurvivalRateArr = new double[sampleSize];
+            double[] forecastedSurvivalRateArr = new double[sampleSize-2];
+            int x=0;
+            int y=0;
+
+            try {
+                ConnController dbConn = new ConnController();
+                Connection fryConn;
+                fryConn = dbConn.getConnection();
+                Statement getUsersStmt = fryConn.createStatement();
+                String getFriesSQL = "SELECT `fryTestID`, `survivalRate`, `testDate`,`userID` FROM `FryImgCountDB` "
+                        + "WHERE fryTestID BETWEEN "+startFryID+" AND "+endFryID;
+                ResultSet friesList = getUsersStmt.executeQuery(getFriesSQL);
+                jTable1.setModel(DbUtils.resultSetToTableModel(friesList));
+                
+                friesList = getUsersStmt.executeQuery(getFriesSQL);
+                XYSeries actualSurivalRate = new XYSeries("Actual Surival Rate");
+                XYSeries forecastedSurvivalRate = new XYSeries("Forecasted Survival Rate");
+                
+                while (friesList.next()) {
+                    double xValue = friesList.getInt("fryTestID");
+                    double yValue = Double.parseDouble(friesList.getString("survivalRate"));
+                    actualSurivalRate.add(xValue, yValue);
+                    actualSurvivalRateArr[y] = yValue;
+                    y++;
+                }
+                
+                dataset.addSeries(actualSurivalRate);
+                
+                int index=0;
+                for (double i : actualSurvivalRateArr) {
+                    smaObj.addData(i);
+                    if(index>=2)
+                    {
+                        forecastedSurvivalRateArr[index-2] = smaObj.getMean();
+                    }
+                    index++;
+                }
+                
+                int startIn = Integer.valueOf(startFryID) + period;
+                
+                for(int ind=0; ind<forecastedSurvivalRateArr.length; ind++)
+                {
+                    forecastedSurvivalRate.add(startIn,forecastedSurvivalRateArr[ind]);
+//                    System.out.println(startIn);
+                    startIn++;
+                }
+//                System.out.println(forecastedSurvivalRateArr);
+                dataset.addSeries(forecastedSurvivalRate);
+                
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        
+        final XYSeries firefox = new XYSeries("Firefox");
+        firefox.add( 1.0 , 1.0 );
+        firefox.add( 2.0 , 4.0 );
+        firefox.add( 3.0 , 3.0 );
+        
+        final XYSeries chrome = new XYSeries( "Chrome" );
+        chrome.add( 1.0 , 4.0 );
+        chrome.add( 2.0 , 5.0 );
+        chrome.add( 3.0 , 6.0 );
+        
+//        final XYSeriesCollection dataset = new XYSeriesCollection();
+//        dataset.addSeries(firefox);
+//        dataset.addSeries(chrome);
+        
+        JFreeChart xylineChart = ChartFactory.createXYLineChart(
+         "Egg to Fry Survival Rate", 
+         "Fry Test ID",
+         "Survival Rate", 
+         dataset,
+         PlotOrientation.VERTICAL, 
+         true, true, false);
+        
+        XYPlot plot = xylineChart.getXYPlot();
+
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesPaint(0, Color.RED);
+        renderer.setSeriesPaint(1, Color.BLUE);
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+        renderer.setSeriesStroke(1, new BasicStroke(3.0f));
+
+        plot.setRenderer(renderer);
+        plot.setBackgroundPaint(Color.white);
+
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.BLACK);
+
+        plot.setDomainGridlinesVisible(true);
+        plot.setDomainGridlinePaint(Color.BLACK);
+
+        xylineChart.getLegend().setFrame(BlockBorder.NONE);
+
+        xylineChart.setTitle(new TextTitle("Egg to Fry Survival Rate",
+                        new Font("Sans Serif", java.awt.Font.BOLD, 18)
+                )
+        );
+        
+        ChartPanel chartpanel = new ChartPanel(xylineChart);
+        
+        jPanel1.add(chartpanel,BorderLayout.CENTER);
+        jPanel1.validate();
+    }//GEN-LAST:event_RunTestBtnActionPerformed
+
+    private void ForecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ForecastButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,15 +448,17 @@ public class ForecastFrame extends javax.swing.JFrame {
     private javax.swing.JPanel ChoicesPanel;
     private javax.swing.JButton DatabaseButton;
     private javax.swing.JTextField DisplayField;
-    private javax.swing.JButton EggFryCount;
-    private javax.swing.JButton Forecast;
     private javax.swing.JButton ForecastButton;
     private javax.swing.JButton HomeButton;
-    private javax.swing.JLabel ImgDisplay;
     private javax.swing.JPanel Panel;
-    private javax.swing.JButton SearchButton;
-    private javax.swing.JTextField SearchField;
+    private javax.swing.JButton RunTestBtn;
     private javax.swing.JSeparator Separator;
-    private javax.swing.JButton Users;
+    private javax.swing.JTextField endFryIDTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField startFryIDTextField;
     // End of variables declaration//GEN-END:variables
 }
