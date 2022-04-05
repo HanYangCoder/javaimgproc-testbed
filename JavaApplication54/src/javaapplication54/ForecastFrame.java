@@ -25,6 +25,9 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -35,9 +38,27 @@ public class ForecastFrame extends javax.swing.JFrame {
     /**
      * Creates new form ForecastFrame
      */
+    
+    String userID = "";
+    double forecastedSurvivalRate;
+    
     public ForecastFrame() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        pack();
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
+        setResizable(false);
+    }
+    
+    public ForecastFrame(String userID) {
+        initComponents();
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.userID = userID;
+        pack();
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
+        setResizable(false);
     }
 
     /**
@@ -52,8 +73,8 @@ public class ForecastFrame extends javax.swing.JFrame {
         Panel = new javax.swing.JPanel();
         ChoicesPanel = new javax.swing.JPanel();
         HomeButton = new javax.swing.JButton();
-        DatabaseButton = new javax.swing.JButton();
-        ForecastButton = new javax.swing.JButton();
+        ImgProcButton = new javax.swing.JButton();
+        DatabaseBtn = new javax.swing.JButton();
         Choices2Panel = new javax.swing.JPanel();
         Separator = new javax.swing.JSeparator();
         startFryIDTextField = new javax.swing.JTextField();
@@ -63,11 +84,13 @@ public class ForecastFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         DisplayField = new javax.swing.JTextField();
+        SaveTestBtn = new javax.swing.JButton();
         RunTestBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         Panel.setPreferredSize(new java.awt.Dimension(1920, 1080));
         Panel.setLayout(null);
@@ -86,27 +109,27 @@ public class ForecastFrame extends javax.swing.JFrame {
             }
         });
 
-        DatabaseButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        DatabaseButton.setText("Egg/Fry Count");
-        DatabaseButton.setBorder(null);
-        DatabaseButton.setBorderPainted(false);
-        DatabaseButton.setContentAreaFilled(false);
-        DatabaseButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        DatabaseButton.addActionListener(new java.awt.event.ActionListener() {
+        ImgProcButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        ImgProcButton.setText("Egg/Fry Count");
+        ImgProcButton.setBorder(null);
+        ImgProcButton.setBorderPainted(false);
+        ImgProcButton.setContentAreaFilled(false);
+        ImgProcButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        ImgProcButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DatabaseButtonActionPerformed(evt);
+                ImgProcButtonActionPerformed(evt);
             }
         });
 
-        ForecastButton.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        ForecastButton.setText("View Records");
-        ForecastButton.setBorder(null);
-        ForecastButton.setBorderPainted(false);
-        ForecastButton.setContentAreaFilled(false);
-        ForecastButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        ForecastButton.addActionListener(new java.awt.event.ActionListener() {
+        DatabaseBtn.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        DatabaseBtn.setText("View Records");
+        DatabaseBtn.setBorder(null);
+        DatabaseBtn.setBorderPainted(false);
+        DatabaseBtn.setContentAreaFilled(false);
+        DatabaseBtn.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        DatabaseBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ForecastButtonActionPerformed(evt);
+                DatabaseBtnActionPerformed(evt);
             }
         });
 
@@ -118,9 +141,9 @@ public class ForecastFrame extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(HomeButton)
                 .addGap(29, 29, 29)
-                .addComponent(DatabaseButton)
+                .addComponent(ImgProcButton)
                 .addGap(31, 31, 31)
-                .addComponent(ForecastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(DatabaseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ChoicesPanelLayout.setVerticalGroup(
@@ -129,8 +152,8 @@ public class ForecastFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(ChoicesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DatabaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ForecastButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ImgProcButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DatabaseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -220,7 +243,21 @@ public class ForecastFrame extends javax.swing.JFrame {
         Panel.add(DisplayField);
         DisplayField.setBounds(410, 20, 230, 50);
 
-        RunTestBtn.setFont(new java.awt.Font("Fira Sans Semi-Light", 1, 18)); // NOI18N
+        SaveTestBtn.setBackground(new java.awt.Color(0, 0, 0));
+        SaveTestBtn.setFont(new java.awt.Font("Fira Sans Semi-Light", 1, 20)); // NOI18N
+        SaveTestBtn.setForeground(new java.awt.Color(255, 255, 255));
+        SaveTestBtn.setText("Save Forecast");
+        SaveTestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveTestBtnActionPerformed(evt);
+            }
+        });
+        Panel.add(SaveTestBtn);
+        SaveTestBtn.setBounds(710, 620, 190, 50);
+
+        RunTestBtn.setBackground(new java.awt.Color(0, 0, 0));
+        RunTestBtn.setFont(new java.awt.Font("Fira Sans Semi-Light", 1, 20)); // NOI18N
+        RunTestBtn.setForeground(new java.awt.Color(255, 255, 255));
         RunTestBtn.setText("Run Forecast");
         RunTestBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +265,7 @@ public class ForecastFrame extends javax.swing.JFrame {
             }
         });
         Panel.add(RunTestBtn);
-        RunTestBtn.setBounds(120, 640, 190, 50);
+        RunTestBtn.setBounds(120, 620, 190, 50);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -238,11 +275,11 @@ public class ForecastFrame extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
 
         Panel.add(jPanel1);
-        jPanel1.setBounds(410, 100, 820, 530);
+        jPanel1.setBounds(410, 100, 820, 510);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_BG.png"))); // NOI18N
         Panel.add(Background);
@@ -257,7 +294,7 @@ public class ForecastFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -265,18 +302,16 @@ public class ForecastFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeButtonActionPerformed
-        new HomeFrame().setVisible(true);
+        new HomeFrame(userID).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_HomeButtonActionPerformed
 
-    private void DatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatabaseButtonActionPerformed
-        new DatabaseFrame().setVisible(true);
+    private void ImgProcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImgProcButtonActionPerformed
+        new ThesisJFrame(userID).setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_DatabaseButtonActionPerformed
+    }//GEN-LAST:event_ImgProcButtonActionPerformed
 
     private void RunTestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTestBtnActionPerformed
-        // TODO add your handling code here:
-        // SELECT `fryTestID`, `survivalRate`, `testDate`,`userID` FROM `FryImgCountDB` WHERE fryTestID BETWEEN 2 AND 9
         
         jPanel1.setLayout(new java.awt.BorderLayout());
         
@@ -346,6 +381,8 @@ public class ForecastFrame extends javax.swing.JFrame {
 //                System.out.println(forecastedSurvivalRateArr);
                 dataset.addSeries(forecastedSurvivalRate);
                 
+                this.forecastedSurvivalRate = forecastedSurvivalRateArr[forecastedSurvivalRateArr.length-1];
+                
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -403,9 +440,40 @@ public class ForecastFrame extends javax.swing.JFrame {
         jPanel1.validate();
     }//GEN-LAST:event_RunTestBtnActionPerformed
 
-    private void ForecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastButtonActionPerformed
+    private void DatabaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DatabaseBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ForecastButtonActionPerformed
+        new DatabaseFrame(userID).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_DatabaseBtnActionPerformed
+
+    private void SaveTestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveTestBtnActionPerformed
+        // TODO add your handling code here:
+        
+        LocalDate dateNow = LocalDate.now();
+        LocalTime timeNow = LocalTime.now();
+        
+        try{
+            ConnController dbConn = new ConnController();
+            Connection forecastConn;
+            forecastConn = dbConn.getConnection();
+            Statement saveStmt = forecastConn.createStatement();
+            String saveForecastSQL = "INSERT INTO `ForecastingRateDB`(`testDate`, "
+                    + "`testTime`, `survivalRateForecast`, `startFryTestID`, "
+                    + "`endFryTestID`, `userID`) VALUES ('"+dateNow+"','"+timeNow.truncatedTo(ChronoUnit.SECONDS)+"',"
+                    + "'"+forecastedSurvivalRate+"','"+startFryIDTextField.getText()+"','"
+                    + ""+endFryIDTextField.getText()+"','"+userID+"')";
+            
+            saveStmt.executeUpdate(saveForecastSQL);
+            
+            String message = "Your newest forecast has been saved!\nPlease check it in the records.";
+            JOptionPane.showMessageDialog(null, message);
+            
+        }catch(Exception e){
+            System.out.println(e);
+            String message = e+"\nPlease contact your system administrator.";
+            JOptionPane.showMessageDialog(null, message);
+        }
+    }//GEN-LAST:event_SaveTestBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -446,12 +514,13 @@ public class ForecastFrame extends javax.swing.JFrame {
     private javax.swing.JLabel Background;
     private javax.swing.JPanel Choices2Panel;
     private javax.swing.JPanel ChoicesPanel;
-    private javax.swing.JButton DatabaseButton;
+    private javax.swing.JButton DatabaseBtn;
     private javax.swing.JTextField DisplayField;
-    private javax.swing.JButton ForecastButton;
     private javax.swing.JButton HomeButton;
+    private javax.swing.JButton ImgProcButton;
     private javax.swing.JPanel Panel;
     private javax.swing.JButton RunTestBtn;
+    private javax.swing.JButton SaveTestBtn;
     private javax.swing.JSeparator Separator;
     private javax.swing.JTextField endFryIDTextField;
     private javax.swing.JLabel jLabel1;

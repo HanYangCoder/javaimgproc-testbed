@@ -58,7 +58,7 @@ public class EggFryCountDBController {
     }
     
     // to test
-    public void createFryCountEntry(int noOfFriesInTank, int survivalRate, String testDate, 
+    public void createFryCountEntry(int noOfFriesInTank, double survivalRate, String testDate, 
             String testTime, int hatchTankNum, String fryImage, int eggTestID, int userID){
         try {
             eggFryConn = dbConn.getConnection();
@@ -256,6 +256,35 @@ public class EggFryCountDBController {
           catch (SQLException e) {
               System.out.println(e);
           }
+        }
+    }
+    
+    public double getSurvivalRate(int fryMicroCount, int eggTestID){
+        
+        int eggMicroCount = 0;
+        ResultSet eggCount;
+        
+        try {
+            eggFryConn = dbConn.getConnection();
+            eggFryStmt = eggFryConn.createStatement();
+            
+            String getsurvivalRateSQL = "SELECT noOfEggsInMirco FROM EggImgCountDB WHERE eggTestID = "+ eggTestID;
+            eggCount = eggFryStmt.executeQuery(getsurvivalRateSQL);
+            
+            while(eggCount.next()){
+                eggMicroCount = eggCount.getInt("noOfEggsInMirco");
+            }
+            
+        } catch (SQLException e){
+            System.out.println(e);
+        }
+        
+        if(eggMicroCount == 0)
+        {
+            return 0;
+        }
+        else{
+            return Math.round((fryMicroCount/eggMicroCount) * 100);
         }
     }
 }

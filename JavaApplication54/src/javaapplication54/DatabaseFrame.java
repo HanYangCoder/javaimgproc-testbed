@@ -32,7 +32,11 @@ public class DatabaseFrame extends javax.swing.JFrame {
     
     public DatabaseFrame() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        pack();
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
+        setResizable(false);
         
 //        userDB = new UserDBController();
 //        eggFryDB = new EggFryCountDBController();
@@ -41,8 +45,12 @@ public class DatabaseFrame extends javax.swing.JFrame {
     
     public DatabaseFrame(String userID) {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.userID = userID;
+        pack();
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
+        setResizable(false);
     }
 
     /**
@@ -237,7 +245,7 @@ public class DatabaseFrame extends javax.swing.JFrame {
         DisplayField.setText("User Records");
         DisplayField.setBorder(null);
         DatabasePanel.add(DisplayField);
-        DisplayField.setBounds(600, 20, 420, 50);
+        DisplayField.setBounds(530, 20, 580, 50);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -365,12 +373,28 @@ public class DatabaseFrame extends javax.swing.JFrame {
 
     private void PreviousForecastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreviousForecastActionPerformed
         // TODO add your handling code here:
-        //new ForecastFrame().setVisible(true);
-        //this.setVisible(false);
+        try{
+            
+            ConnController dbConn = new ConnController();
+            Connection userConn;
+            userConn = dbConn.getConnection();
+            Statement getUsersStmt = userConn.createStatement();
+            String getUsersSQL = "SELECT * FROM ForecastingRateDB";
+            ResultSet userList = getUsersStmt.executeQuery(getUsersSQL);
+            
+            jTable1.setModel(DbUtils.resultSetToTableModel(userList));
+            
+            DisplayField.setText("Previous Forecasting Rate Records");
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_PreviousForecastActionPerformed
 
     private void ForecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastButtonActionPerformed
         // TODO add your handling code here:
+        new ForecastFrame(userID).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_ForecastButtonActionPerformed
 
     private void showUserTable(){

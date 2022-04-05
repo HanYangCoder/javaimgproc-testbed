@@ -6,7 +6,12 @@
 package javaapplication54;
 
 import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.io.File;
 import javax.swing.ImageIcon;
@@ -16,6 +21,9 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -32,6 +40,8 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
 import org.opencv.core.MatOfByte;
+import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.highgui.HighGui;
@@ -48,19 +58,37 @@ public class ThesisJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+    private BufferedImage image;
+    
     String userID = "";
     String filename;
+    int total = 0;
+    double estimatedTotalCount;
+    int eggTestID;
+    double survivalRate;
+    int hatchTankNum;
+    
+    EggFryCountDBController eggfryCount = new EggFryCountDBController();
     
     public ThesisJFrame() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        pack();
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
+        setResizable(false);
+        
     }
     
     public ThesisJFrame(String userID) {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.userID = userID;
-    }
+        pack();
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
+        setResizable(false);
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,17 +108,18 @@ public class ThesisJFrame extends javax.swing.JFrame {
         UploadButton = new javax.swing.JButton();
         RunTestButton = new javax.swing.JButton();
         SaveTestButton = new javax.swing.JButton();
-        FryCountField = new javax.swing.JTextField();
+        TotalCountField = new javax.swing.JTextField();
         SelectLabel = new javax.swing.JLabel();
         Classification = new javax.swing.JComboBox<>();
         EggCountLabel = new javax.swing.JLabel();
-        EggCountField = new javax.swing.JTextField();
+        SampleCountField = new javax.swing.JTextField();
         FryCountLabel = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         Panel.setPreferredSize(new java.awt.Dimension(1920, 1080));
         Panel.setLayout(null);
@@ -233,15 +262,15 @@ public class ThesisJFrame extends javax.swing.JFrame {
         Panel.add(Panel2);
         Panel2.setBounds(40, 570, 780, 93);
 
-        FryCountField.setEditable(false);
-        FryCountField.setBackground(new java.awt.Color(255, 255, 255));
-        FryCountField.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        FryCountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        FryCountField.setText("0000");
-        FryCountField.setBorder(null);
-        FryCountField.setOpaque(false);
-        Panel.add(FryCountField);
-        FryCountField.setBounds(880, 320, 320, 60);
+        TotalCountField.setEditable(false);
+        TotalCountField.setBackground(new java.awt.Color(255, 255, 255));
+        TotalCountField.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        TotalCountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TotalCountField.setText("0000");
+        TotalCountField.setBorder(null);
+        TotalCountField.setOpaque(false);
+        Panel.add(TotalCountField);
+        TotalCountField.setBounds(880, 320, 320, 60);
 
         SelectLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         SelectLabel.setText("Select Image Classification:");
@@ -254,28 +283,28 @@ public class ThesisJFrame extends javax.swing.JFrame {
         Classification.setBounds(840, 90, 370, 60);
 
         EggCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        EggCountLabel.setText("Total egg count:");
+        EggCountLabel.setText("Total count from sample:");
         Panel.add(EggCountLabel);
-        EggCountLabel.setBounds(880, 160, 130, 30);
+        EggCountLabel.setBounds(880, 160, 320, 30);
 
-        EggCountField.setEditable(false);
-        EggCountField.setBackground(new java.awt.Color(255, 255, 255));
-        EggCountField.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        EggCountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        EggCountField.setText("0000");
-        EggCountField.setBorder(null);
-        EggCountField.setOpaque(false);
-        Panel.add(EggCountField);
-        EggCountField.setBounds(880, 190, 320, 60);
+        SampleCountField.setEditable(false);
+        SampleCountField.setBackground(new java.awt.Color(255, 255, 255));
+        SampleCountField.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+        SampleCountField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        SampleCountField.setText("0000");
+        SampleCountField.setBorder(null);
+        SampleCountField.setOpaque(false);
+        Panel.add(SampleCountField);
+        SampleCountField.setBounds(880, 190, 320, 60);
 
         FryCountLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        FryCountLabel.setText("Total fry count:");
+        FryCountLabel.setText("Estimated total count in the tank:");
         Panel.add(FryCountLabel);
-        FryCountLabel.setBounds(880, 290, 130, 30);
+        FryCountLabel.setBounds(880, 290, 320, 30);
 
-        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_BG.png"))); // NOI18N
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/I_BG.png"))); // NOI18N
         Panel.add(Background);
-        Background.setBounds(0, 0, 1280, 720);
+        Background.setBounds(0, 0, 1920, 1080);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -308,49 +337,240 @@ public class ThesisJFrame extends javax.swing.JFrame {
 
     private void RunTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTestButtonActionPerformed
         //For Pop-up Menu
-        JTextField field1 = new JTextField();
-        JTextField field2 = new JTextField();
-        Object[] fields = {
-        "Total water volume from PVC sampler:", field1,
-        "Total water volume of hatching tank:", field2
-        };
+//        JTextField field1 = new JTextField();
+//        JTextField field2 = new JTextField();
+//        Object[] fields = {
+//        "Total water volume from PVC sampler:", field1,
+//        "Total water volume of hatching tank:", field2
+//        };
         
-        JOptionPane.showConfirmDialog(null, fields, "Please enter", JOptionPane.OK_CANCEL_OPTION);
+        double sampleWaterAmount = 1;
+        double totalWaterAmount = 100;
+        
+        String eggOrFry = String.valueOf(Classification.getSelectedItem());
+
+        // if fish eggs is selected
+        if(eggOrFry.equals("Fish eggs"))
+        {
+            JTextField eggfield1 = new JTextField();
+            JTextField eggfield2 = new JTextField();
+            JTextField eggfield3 = new JTextField();
+            Object[] eggfields = {
+            "Total water volume from sampler (mL):", eggfield1,
+            "Total water volume of hatching tank (mL):", eggfield2,
+            "Please enter the hatch tank number of the sample:", eggfield3
+            };
+
+            JOptionPane.showConfirmDialog(null, eggfields, "Please enter", JOptionPane.OK_CANCEL_OPTION);
+            
+            sampleWaterAmount = Integer.parseInt(eggfield1.getText());
+            totalWaterAmount = Integer.parseInt(eggfield2.getText());
+            hatchTankNum = Integer.parseInt(eggfield3.getText());
+        }
+
+        // if fish fries is selected
+        else{
+            JTextField fryfield1 = new JTextField();
+            JTextField fryfield2 = new JTextField();
+            JTextField fryfield3 = new JTextField();
+            JTextField fryfield4 = new JTextField();
+            Object[] fryfields = {
+            "Total water volume from sampler (mL):", fryfield1,
+            "Total water volume of hatching tank(mL):", fryfield2,
+            "Egg Test ID to connect the count:", fryfield3,
+            "Please enter the hatch tank number of the sample:", fryfield4
+            };
+
+            JOptionPane.showConfirmDialog(null, fryfields, "Please enter", JOptionPane.OK_CANCEL_OPTION);
+            
+            sampleWaterAmount = Integer.parseInt(fryfield1.getText());
+            totalWaterAmount = Integer.parseInt(fryfield2.getText());
+            eggTestID = Integer.parseInt(fryfield3.getText());
+            hatchTankNum = Integer.parseInt(fryfield4.getText());
+        }
+        
+//        JOptionPane.showConfirmDialog(null, fields, "Please enter", JOptionPane.OK_CANCEL_OPTION);
         
         //String value = JOptionPane.showInputDialog(this, "Enter value");
         
         //For actual image processing
-        int threshold = 100;
-        Random rng = new Random(12345);
+//        int threshold = 100;
+//        Random rng = new Random(12345);
+//        
+//        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+//        Mat srcGray = new Mat();
+//        Mat src = Imgcodecs.imread(filename);
+//
+//        Imgproc.cvtColor(src, srcGray, Imgproc.COLOR_BGR2GRAY);
+//        Imgproc.blur(srcGray, srcGray, new Size(3, 3));
+//
+//        Mat cannyOutput = new Mat();
+//        Imgproc.Canny(srcGray, cannyOutput, threshold, threshold * 2);
+//        List<MatOfPoint> contours = new ArrayList<>();
+//        Mat hierarchy = new Mat();
+//        Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
+//        Mat drawing = Mat.zeros(cannyOutput.size(), CvType.CV_8UC3);
+//
+//        int contourCount = 0;
+//
+//        for (int i = 0; i < contours.size(); i++) {
+//            Scalar color = new Scalar(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
+//            Imgproc.drawContours(drawing, contours, i, color, 1, Imgproc.LINE_8, hierarchy, 0, new Point());
+//            contourCount++;
+//        }
+//        System.out.println(contourCount);
         
+        int threshold = 80;
+        Random rng = new Random(12345);
+
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
         Mat srcGray = new Mat();
+        
+//        String filename = "/home/hansherrera/Downloads/CE_470_50res.jpg";
+//        String filename = "/home/hansherrera/Downloads/Thesis test images/tilapia-eggs.jpg";
+//        String filename = "/home/hansherrera/Downloads/eggfrytotest/CF_460_50res.jpg";
         Mat src = Imgcodecs.imread(filename);
+        if (src.empty()) {
+            System.err.println("Cannot read image: " + filename);
+            System.exit(0);
+        }
+        
+//        Imgproc.cvtColor(src, srcGray, Imgproc.COLOR_BGR2GRAY);
+//        Imgproc.threshold(srcGray, dst, 80, 255, Imgproc.THRESH_OTSU);
+//        Imgproc.adaptiveThreshold(srcGray, dst, 125, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_OTSU, 11, 12);
+        Mat srcBlur = new Mat();
+        Mat hsvImg = new Mat(src.rows(), src.cols(), src.type());
+        Mat mask = new Mat(src.rows(), src.cols(), src.type());
+        Mat dst = new Mat(src.rows(), src.cols(), src.type());        
+        Mat canny = new Mat();
+        
+        Mat kernel = Mat.ones(5,5, CvType.CV_32F);
+        Imgproc.morphologyEx(src, src, Imgproc.MORPH_OPEN, kernel);
+        Imgproc.morphologyEx(src, src, Imgproc.MORPH_CLOSE, kernel);
+        
+//        Imgproc.blur(src, srcBlur, new Size(3,3));
+        Imgproc.GaussianBlur(src, srcBlur, new Size(5, 5), 0);
+//        Imgproc.medianBlur(src, srcBlur, 3);
+        Imgproc.cvtColor(srcBlur, hsvImg, Imgproc.COLOR_BGR2HSV);
+        // for eggs
+        if(eggOrFry.equals("Fish eggs"))
+        {
+            Core.inRange(hsvImg, new Scalar(17, 80, 0), new Scalar(27, 255, 255), mask);
+        }
+        // for fries
+        else{
+            Core.inRange(hsvImg, new Scalar(0, 35, 0), new Scalar(35, 255, 156), mask);
+        }
+        
+        Core.bitwise_and(src, src, dst, mask);
 
-        Imgproc.cvtColor(src, srcGray, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.blur(srcGray, srcGray, new Size(3, 3));
-
-        Mat cannyOutput = new Mat();
-        Imgproc.Canny(srcGray, cannyOutput, threshold, threshold * 2);
+        Imgproc.Canny(dst, canny, threshold, threshold * 2);
+        
         List<MatOfPoint> contours = new ArrayList<>();
         Mat hierarchy = new Mat();
-        Imgproc.findContours(cannyOutput, contours, hierarchy, Imgproc.RETR_TREE, Imgproc.CHAIN_APPROX_SIMPLE);
-        Mat drawing = Mat.zeros(cannyOutput.size(), CvType.CV_8UC3);
-
+        Imgproc.findContours(canny, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        
+        // create bounding rectangles around detected contours
+        MatOfPoint2f[] contoursPoly  = new MatOfPoint2f[contours.size()];
+        Rect[] boundRect = new Rect[contours.size()];
+        Point[] centers = new Point[contours.size()];
+        float[][] radius = new float[contours.size()][1];
+        for (int i = 0; i < contours.size(); i++) {
+            contoursPoly[i] = new MatOfPoint2f();
+            Imgproc.approxPolyDP(new MatOfPoint2f(contours.get(i).toArray()), contoursPoly[i], 3, true);
+            boundRect[i] = Imgproc.boundingRect(new MatOfPoint(contoursPoly[i].toArray()));
+            centers[i] = new Point();
+            Imgproc.minEnclosingCircle(contoursPoly[i], centers[i], radius[i]);
+        }
+        
+        Mat drawing = Mat.zeros(canny.size(), CvType.CV_8UC3);
+        
+        // this line counts the closed contours present 
+        // after Canny edge was applied
         int contourCount = 0;
 
         for (int i = 0; i < contours.size(); i++) {
             Scalar color = new Scalar(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
             Imgproc.drawContours(drawing, contours, i, color, 1, Imgproc.LINE_8, hierarchy, 0, new Point());
             contourCount++;
+//            Imgproc.rectangle(drawing, boundRect[i].tl(), boundRect[i].br(), color, 1);
         }
-        System.out.println(contourCount);
-        FryCountField.setText(String.valueOf(contourCount));
-        ImgDisplay.setIcon(new ImageIcon(HighGui.toBufferedImage(drawing)));
+        
+        
+        if(eggOrFry.equals("Fish eggs"))
+        {
+            // for eggs
+            double areaMin = 95;
+            double areaMax = 200;
+
+            for(int i=0;i<contours.size();i++)
+            {
+                double area = Imgproc.contourArea(contours.get(i));
+                if(area>areaMax)
+                {
+                    total += (int)(area/areaMin);
+                }
+                else{
+                    if(area>areaMin)
+                    {
+                        total += 1;
+                    }
+                }
+            }
+        }
+        else{
+            //for fries
+            double areaMin = 100;
+            double areaMax = 300;
+
+            for(int i=0;i<contours.size();i++)
+            {
+                double area = Imgproc.contourArea(contours.get(i));
+                if(area>areaMax)
+                {
+                    total += (int)(area/areaMin);
+                }
+                else{
+                    if(area>areaMin)
+                    {
+                        total += 1;
+                    }
+                }
+            }
+        }
+        
+        survivalRate = eggfryCount.getSurvivalRate(total, eggTestID);
+        
+        SampleCountField.setText(String.valueOf(total));
+        estimatedTotalCount = (total/sampleWaterAmount) * totalWaterAmount;
+        TotalCountField.setText(String.valueOf((int)estimatedTotalCount));
+        
+        System.out.println("Survival Rate: " + survivalRate);
+        
+//        TotalCountField.setText(String.valueOf(contourCount));
+        ImgDisplay.setIcon(new ImageIcon(HighGui.toBufferedImage(drawing).getScaledInstance(ImgDisplay.getWidth(), ImgDisplay.getHeight(), Image.SCALE_SMOOTH)));
     }//GEN-LAST:event_RunTestButtonActionPerformed
 
     private void SaveTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveTestButtonActionPerformed
         // TODO add your handling code here:
+        EggFryCountDBController savetest = new EggFryCountDBController();
+        String eggOrFry = String.valueOf(Classification.getSelectedItem());
+        LocalDate dateNow = LocalDate.now();
+        LocalTime timeNow = LocalTime.now();
+        
+        // inputs work well now
+        if(eggOrFry.equals("Fish eggs"))
+        {
+            savetest.createEggCountEntry(total, (int)estimatedTotalCount, String.valueOf(dateNow), 
+                    String.valueOf(timeNow.truncatedTo(ChronoUnit.SECONDS)), hatchTankNum, filename, Integer.parseInt(userID));
+        }
+        else{
+            savetest.createFryCountEntry((int)estimatedTotalCount, survivalRate, String.valueOf(dateNow), 
+                    String.valueOf(timeNow.truncatedTo(ChronoUnit.SECONDS)), hatchTankNum, filename, eggTestID, Integer.parseInt(userID));
+        }
+        
+        JOptionPane.showMessageDialog(null, "Your test has been successfully saved!\nPlease check the records.");
     }//GEN-LAST:event_SaveTestButtonActionPerformed
 
     private void HomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeButtonActionPerformed
@@ -364,7 +584,8 @@ public class ThesisJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_DatabaseButtonActionPerformed
 
     private void ForecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastButtonActionPerformed
-        // TODO add your handling code here:
+        new ForecastFrame(userID).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_ForecastButtonActionPerformed
 
     /**
@@ -393,18 +614,18 @@ public class ThesisJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel ChoicesPanel;
     private javax.swing.JComboBox<String> Classification;
     private javax.swing.JButton DatabaseButton;
-    private javax.swing.JTextField EggCountField;
     private javax.swing.JLabel EggCountLabel;
     private javax.swing.JButton ForecastButton;
-    private javax.swing.JTextField FryCountField;
     private javax.swing.JLabel FryCountLabel;
     private javax.swing.JButton HomeButton;
     private javax.swing.JLabel ImgDisplay;
     private javax.swing.JPanel Panel;
     private javax.swing.JPanel Panel2;
     private javax.swing.JButton RunTestButton;
+    private javax.swing.JTextField SampleCountField;
     private javax.swing.JButton SaveTestButton;
     private javax.swing.JLabel SelectLabel;
+    private javax.swing.JTextField TotalCountField;
     private javax.swing.JButton UploadButton;
     // End of variables declaration//GEN-END:variables
 }

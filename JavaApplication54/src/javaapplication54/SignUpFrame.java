@@ -26,7 +26,7 @@ public class SignUpFrame extends javax.swing.JFrame {
      */ 
     public SignUpFrame() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**

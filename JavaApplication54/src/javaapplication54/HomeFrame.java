@@ -20,13 +20,21 @@ public class HomeFrame extends javax.swing.JFrame {
     
     public HomeFrame() {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        pack();
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
+        setResizable(false);
     }
     
     public HomeFrame(String userID) {
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.userID = userID;
+        pack();
+        setLocationRelativeTo(null);
+        setSize(1280, 720);
+        setResizable(false);
     }
 
     /**
@@ -46,17 +54,19 @@ public class HomeFrame extends javax.swing.JFrame {
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         Panel.setMaximumSize(new java.awt.Dimension(1920, 1080));
-        Panel.setMinimumSize(new java.awt.Dimension(1920, 1080));
+        Panel.setMinimumSize(new java.awt.Dimension(1280, 720));
+        Panel.setPreferredSize(new java.awt.Dimension(1280, 720));
         Panel.setLayout(null);
 
-        DestinationLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DestinationLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         DestinationLabel.setForeground(new java.awt.Color(255, 255, 255));
         DestinationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DestinationLabel.setText("Please choose your desired destination:");
         Panel.add(DestinationLabel);
-        DestinationLabel.setBounds(440, 180, 400, 60);
+        DestinationLabel.setBounds(330, 180, 570, 60);
 
         CountButton.setBackground(new java.awt.Color(0, 0, 0));
         CountButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -71,7 +81,7 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         Panel.add(CountButton);
-        CountButton.setBounds(440, 270, 400, 60);
+        CountButton.setBounds(410, 270, 400, 60);
 
         RecordButton.setBackground(new java.awt.Color(0, 0, 0));
         RecordButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -86,7 +96,7 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         Panel.add(RecordButton);
-        RecordButton.setBounds(440, 360, 400, 60);
+        RecordButton.setBounds(410, 360, 400, 60);
 
         ForecastButton.setBackground(new java.awt.Color(0, 0, 0));
         ForecastButton.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
@@ -101,11 +111,14 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         Panel.add(ForecastButton);
-        ForecastButton.setBounds(440, 450, 400, 60);
+        ForecastButton.setBounds(410, 450, 400, 60);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_Blue.jpg"))); // NOI18N
+        Background.setMaximumSize(new java.awt.Dimension(1920, 1080));
+        Background.setMinimumSize(new java.awt.Dimension(1920, 1080));
+        Background.setPreferredSize(new java.awt.Dimension(1920, 1080));
         Panel.add(Background);
-        Background.setBounds(0, 0, 1660, 920);
+        Background.setBounds(0, 0, 1920, 1080);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,14 +132,14 @@ public class HomeFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ForecastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForecastButtonActionPerformed
-        new ForecastFrame().setVisible(true);
+        new ForecastFrame(userID).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_ForecastButtonActionPerformed
 

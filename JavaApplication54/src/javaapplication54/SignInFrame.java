@@ -26,6 +26,8 @@ public class SignInFrame extends javax.swing.JFrame {
      */
     public SignInFrame() {
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
         
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -185,9 +187,10 @@ public class SignInFrame extends javax.swing.JFrame {
 
         FreshCountLabel.setFont(new java.awt.Font("Segoe UI", 1, 75)); // NOI18N
         FreshCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        FreshCountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         FreshCountLabel.setText("FRESH COUNT");
         Panel.add(FreshCountLabel);
-        FreshCountLabel.setBounds(650, 260, 520, 120);
+        FreshCountLabel.setBounds(570, 260, 690, 120);
 
         Panel_1.setOpaque(false);
 
@@ -225,7 +228,7 @@ public class SignInFrame extends javax.swing.JFrame {
         );
 
         Panel.add(Panel_1);
-        Panel_1.setBounds(650, 350, 520, 100);
+        Panel_1.setBounds(650, 350, 520, 101);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javaapplication54/Images/I_Blue.jpg"))); // NOI18N
         Panel.add(Background);
