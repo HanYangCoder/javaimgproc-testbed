@@ -343,7 +343,7 @@ public class ThesisJFrame extends javax.swing.JFrame {
 //        "Total water volume from PVC sampler:", field1,
 //        "Total water volume of hatching tank:", field2
 //        };
-        
+        total = 0;  // reset the total count every run test
         double sampleWaterAmount = 1;
         double totalWaterAmount = 100;
         
